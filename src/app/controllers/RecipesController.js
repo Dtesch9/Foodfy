@@ -1,4 +1,6 @@
 const Recipes = require('../models/Recipes')
+const File = require('../models/File')
+
 
 module.exports = {
   async index(req, res) {
@@ -13,7 +15,28 @@ module.exports = {
   },
   async post(req, res, next) { 
     try {
+      if (req.files.length == 0)  return res.send('please, send at least one image')
+
+      File.init({ table: 'files' })
+      const filesPromise = req.files.map(file => File.create({
+          name: file.filename,
+          path: file.path
+      }))
+
+      const filesIds = await Promise.all(filesPromise)
+
+
       const recipeId = await Recipes.create(req.body)
+      
+
+      File.init({ table: 'recipe_files'})
+      const relationPromise = filesIds.map(id => File.create({
+        recipe_id: recipeId,
+        file_id: id
+      }))
+
+      await Promise.all(relationPromise)
+
 
       return res.redirect(`/admin/recipes/${recipeId}`)
       

@@ -4,7 +4,7 @@
 
 {% block content %}
   <div class="app">
-    <form action="/admin/recipes?_method=PUT" method="post" id="save">
+    <form action="/admin/recipes?_method=PUT" method="post" id="save" enctype="multipart/form-data">
       <input type="hidden" name="id" value="{{recipe.id}}">
 
       <div class="head-form">
