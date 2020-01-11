@@ -1,6 +1,6 @@
 # Desafio-Bootcamp-LaunchBase-06
 Lastest Version of Foodfy web app
-Criando novas áreas administrativas para chefes, inserindo banco de dados, relacionando tabelas.
+Criando nova funcionalidade de envio de imagens com o multer.
 
 # Foodfy
 
