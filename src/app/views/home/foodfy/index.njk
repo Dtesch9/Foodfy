@@ -1,0 +1,30 @@
+{% extends "home/layout.njk" %}
+
+{% block title %} <title>Foodfy</title> {% endblock %}
+
+{% block content %}
+
+  <div class="app">
+    <div class="billboard">
+      <div class="head">
+        <h2>As melhores receitas</h2>
+        <p>Aprenda a construir os melhores pratos
+        com receitas criadas por profissionais
+        do mundo inteiro.</p>
+      </div>
+      <img src="/chef.png" alt="">
+    </div>
+    <section>
+      <h2>Mais acessadas</h2>
+      <div class="cards">
+      {% for item in items %}
+        <div class="card">
+          <img src="{{item.image}}" alt="">
+          <h6>{{item.title}}</h6>
+          <p>{{item.author}}</p>
+        </div>
+      {% endfor %}
+    </section>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+<div class="fields">
+ 
+  <div class="field">
+    <p>Nome</p>
+    <input type="text" name="name" value="{{chef.name}}">
+  </div>
+
+  <div class="field">
+    <p>Autor</p>
+
+    {% if file %}
+      <input type="url" Placeholder="{{file.path}}">
+    {% endif %}
+
+    <div id="avatar-upload">
+      <input 
+        id="avatar-input"
+        type="file" 
+        name="name"
+        accept="image/*" 
+      >
+      <p>Enviar Avatar</p>
+    </div>    
+  </div>
+
+</div>

@@ -1,0 +1,427 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+:root {
+  --title-color: #111111;
+  --rck-color:#6558C3
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+
+  text-decoration: none;
+}
+
+html, body {
+  min-height: 100vh;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+}
+
+/* = HEADER =  */
+header {
+  padding: 32px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+
+  max-width: 940px;
+  width: 95%;
+  margin: 0 auto;
+
+  position: relative;
+
+}
+
+nav div a:first-child {
+  margin-right: 70px;
+}
+
+nav a {
+  font-size: 16px;
+  color: var(--title-color);
+  position: relative;
+}
+
+.links {
+  display: flex;
+}
+
+.links a + a {
+  margin-left: 30px;
+}
+
+.links a:hover {
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--title-color);
+}
+
+nav .links a:first-child::after {
+  display: none;
+}
+
+.links a::after {
+  content: "";
+  width: 0;
+  height: 2px;
+  background-color: rgb(90, 56, 62);
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+}
+
+.links a:hover::after {
+  width: 100%;
+  transition: width 250ms cubic-bezier(1, 0.2, 0.65, 0.89) ;
+}
+
+.links .active {
+  font-weight: bold;
+}
+
+form {
+  display: grid;
+  grid-template-columns: auto 120px;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  right: 0;
+}
+
+@media (max-width: 875px) {
+  nav {
+    display: block;
+  }
+
+  form {
+    position: initial;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  @media (max-width: 650px) {
+    form {
+      justify-content: center;
+    }
+  }
+}
+
+form input[type="text"] {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 8px 24px;
+}
+
+
+form button {
+  margin-left: 1%;
+  background-color: var(--rck-color);
+  border-radius: 4px;
+  padding: 8px 32px;
+
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* = FOOTER = */
+footer {
+  padding: 32px;
+  background: #eeeeee;
+  margin-top: auto;
+}
+
+footer p {
+  font-size: 14px;
+  color: #999999;
+  text-align: center;
+}
+
+/* BODY */
+div.app {
+  max-width: 940px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* = Body Billboard = */
+.billboard {
+  width: 100%;
+  height: 366px;
+  margin: 0 auto;
+
+  background-color: #FBDFDB;
+  border-radius: 30px;
+
+  display: flex;
+  position: relative;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-left: 10%;
+}
+
+.head h2 {
+  font-weight: bold;
+  font-size: 32px;
+  color: var(--title-color);
+  margin-bottom: 5%;
+}
+
+.head p {
+  opacity: .7;
+  font-size: 18px;
+  color: #000000;
+  line-height: 28px;
+  max-width: 316px;
+  align-items: left;
+}
+
+.billboard img {
+  position: absolute;
+  align-self: flex-end;
+  right: 11%;
+}
+
+@media (max-width: 700px) {
+  .billboard img {
+    display: none;
+  }
+}
+
+/* = ABOUT CONTENT = */
+.title-content > h2,
+.title-content > h3 {
+  margin-bottom: 2.5%;
+}
+
+.title-content h2 {
+  margin-top: 2%;
+  font-weight: bold;
+  font-size: 24px;
+  color: var(--title-color);
+}
+
+.title-content > h3 {
+  margin-top: 3.9%;
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--title-color);
+}
+
+.title-content p {
+  text-align: left;
+  font-size: 18px;
+  color: #444444;
+  line-height: 28px;
+}
+
+.title-content:last-child p {
+  margin-bottom: 6.5%;
+}
+
+/* = Cards = */
+section {
+  margin: 5% 0;
+}
+
+.cards {
+  margin-top: 2%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px 20px;
+}
+
+.card img {
+  border-radius: 15px;
+  margin-bottom: 2%;
+  max-width: 300px;
+  height: 140px;
+}
+
+.card.recipe-pointer img {
+  cursor: pointer;
+}
+
+.card h6 {
+  font-weight: normal;
+  font-size: 18px;
+  color: var(--title-color);
+  margin-bottom: 5px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #777777;
+}
+
+/* = Grid Resizing = */
+@media (max-width: 1020px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+  section h2 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 650px) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* == Recipe-Info == */
+.head-description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 7%;
+}
+
+.head-description img {
+  max-width: 940px;
+  width: 100%;
+  height: 280px;
+  border-radius: 15px;
+  margin-bottom: 7%;
+  object-fit: cover;
+}
+
+.head-description h6 {
+  font-weight: bold;
+  font-size: 36px;
+  color: var(--title-color);
+}
+
+.head-description p {
+  font-weight: normal;
+  font-size: 20px;
+  color: #777777;
+}
+
+.recipe-container {
+  margin-bottom: 8%;
+}
+
+.prep-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.9%;
+}
+
+@media (max-width: 650px) {
+  .recipe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .prep-title {
+    display: block;
+  }
+  .prep-title {
+    text-align: center;
+  }
+  .prep-title h1 {
+    margin-bottom: 6%;
+  }
+}
+
+
+.prep-title h1 {
+  margin-right: 3%;
+  font-weight: bold;
+  font-size: 24px;
+  color: var(--title-color);
+}
+
+.prep-title p {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  color: #999999;
+  cursor: pointer;
+}
+
+.recipe-container ul {
+  list-style-position: inside;
+  font-weight: normal;
+  font-size: 18px;
+  color: #444444;
+  line-height: 28px;
+  margin-bottom: 5.3%;
+}
+
+.recipe-container .content p {
+  font-weight: normal;
+  font-size: 18px;
+  color: #444444;
+  line-height: 28px;
+}
+
+/* == CHEFS == */
+.chefs-container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px 0;
+}
+
+@media (max-width: 940px) {
+  .chefs-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 700px) {
+    .chefs-container {
+      grid-template-columns: repeat(2, 1fr);
+
+      justify-items: center;
+    }
+  }
+}
+
+.chef {
+  display: flex;
+  align-items: center;
+}
+
+.chef img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chef-info > *{
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.chef-info h3 {
+  font-weight: normal;
+  font-size: 18px;
+  color: var(--title-color);
+}
+
+.chef-info > p {
+  font-weight: normal;
+  font-size: 14px;
+  color: #666666;
+}

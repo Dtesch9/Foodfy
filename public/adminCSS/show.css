@@ -1,0 +1,138 @@
+/* == Show Recipe == */
+
+.head-show {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3.5%;
+}
+
+.head-show h1 {
+  font-weight: bold;
+  font-size: 24px;
+  color: var(--title-color);
+}
+
+.show-button a {
+  background-color: var(--rck-color);
+  border-radius: 4px;
+  padding: 10px 17px;
+
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.head-description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 7%;
+}
+
+.head-description img {
+  max-width: 940px;
+  width: 100%;
+  height: 280px;
+  border-radius: 15px;
+  margin-bottom: 7%;
+  object-fit: cover;
+}
+
+.head-description h6 {
+  font-weight: bold;
+  font-size: 36px;
+  color: var(--title-color);
+}
+
+.head-description p {
+  font-weight: normal;
+  font-size: 20px;
+  color: #777777;
+}
+
+.recipe-container {
+  margin-bottom: 8%;
+}
+
+.prep-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.9%;
+}
+
+@media (max-width: 650px) {
+  .recipe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .prep-title {
+    display: block;
+  }
+  .prep-title {
+    text-align: center;
+  }
+  .prep-title h1 {
+    margin-bottom: 6%;
+  }
+}
+
+
+.prep-title h1 {
+  margin-right: 3%;
+  font-weight: bold;
+  font-size: 24px;
+  color: var(--title-color);
+}
+
+.prep-title p {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  color: #999999;
+  cursor: pointer;
+}
+
+.recipe-container ul {
+  list-style-position: inside;
+  font-weight: normal;
+  font-size: 18px;
+  color: #444444;
+  line-height: 28px;
+  margin-bottom: 5.3%;
+}
+
+.recipe-container .content p {
+  font-weight: normal;
+  font-size: 18px;
+  color: #444444;
+  line-height: 28px;
+}
+
+/* == Show Chef == */
+.chef-description img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.chef-description h6 {
+  font-weight: bold;
+  font-size: 36px;
+  color: var(--title-color);
+  margin-bottom: 4px;
+}
+
+.chef-description p {
+  font-weight: normal;
+  font-size: 20px;
+  color: #777777;
+}
+
+.chef-recipes h1 {
+  font-weight: bold;
+  font-size: 24px;
+  color: var(--title-color);
+}
