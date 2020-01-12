@@ -13,7 +13,7 @@ module.exports = {
 
       return files[0]
     }
-    
+
 
     const recipesPromise = recipes.map(async recipe => {
       recipe.image = await getImages(recipe.id)
@@ -93,6 +93,27 @@ module.exports = {
   },
   async put(req, res) {
     try {
+      if (req.files.length != 0) {
+        File.init({ table: 'files' })
+        const filesPromise = req.files.map(file => File.create({
+          name: file.filename,
+          path: file.path
+        }))
+
+        const filesIds = await Promise.all(filesPromise)
+
+
+        File.init({ table: 'recipe_files' })
+        const relationPromise = filesIds.map(id => File.create({
+          recipe_id: req.body.id,
+          file_id: id
+        }))
+
+        await Promise.all(relationPromise)
+      }
+      
+
+
       if (req.body.removed_files) {
         const removedFiles = req.body.removed_files.split(',')
         removedFiles.splice(-1,1)

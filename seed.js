@@ -74,7 +74,7 @@ async function createFiles() {
   while (files.length < 20) {
     files.push({
       name: `${Date.now()}-${faker.image.image()}`,
-      path: `public/images/placeholder.png`
+      path: `public/images/placeholder-${files.length + 1}.png`
     })
   }
 

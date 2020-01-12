@@ -37,10 +37,10 @@ ALTER TABLE "chefs" ADD COLUMN "file_id" INTEGER REFERENCES files(id);
 
 
 -- to run seeds || recipe_files and files must be deleted in order
-DELETE FROM chefs;
-DELETE FROM recipes;
 DELETE FROM recipe_files;
 DELETE FROM files;
+DELETE FROM chefs;
+DELETE FROM recipes;
 
 -- restart sequence auto_increment from tales ids
 ALTER SEQUENCE chefs_id_seq RESTART WITH 1;
