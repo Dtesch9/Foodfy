@@ -4,7 +4,7 @@ async function input(req, res, next) {
   const keys = Object.keys(req.body)
 
   for (let key of keys) {
-    if (req.body[key] == "") return res.send('Please fulfill all fields!')
+    if (req.body[key] == "" && key != "removed_files") return res.send('Please fulfill all fields!')
   }
 
   next()

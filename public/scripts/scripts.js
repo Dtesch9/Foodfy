@@ -89,5 +89,18 @@ const PhotosUpload = {
 
 
     photoDiv.remove()
+  },
+  removeOldPhoto(event) {
+    const photodiv = event.target.parentNode
+
+    if (photodiv.id) {
+      const removedFiles = document.querySelector('input[name="removed_files"]')
+
+      if (removedFiles) {
+        removedFiles.value += `${photodiv.id},`
+      }
+    }
+
+    photodiv.remove()
   }
 }

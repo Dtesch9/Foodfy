@@ -1,4 +1,5 @@
 const db = require('../../config/db')
+const { unlinkSync } = require('fs')
 
 
 const File = {
@@ -26,6 +27,23 @@ const File = {
       const results = await db.query(query)
 
       return results.rows[0].id
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async delete(id) {
+    try {
+      const result = await db.query('SELECT * FROM files WHERE id = $1', [id])
+      const filePath = result.rows[0].path
+
+
+      await db.query(`DELETE FROM recipe_files WHERE file_id = $1`, [id])
+      
+      await db.query(`DELETE FROM files WHERE id = $1`, [id])
+
+      unlinkSync(filePath)
+
+      return
     } catch (error) {
       console.error(error);
     }

@@ -66,20 +66,16 @@ module.exports = {
       const query = `
         UPDATE recipes SET
           chef_id=($1),
-          image=($2),
-          title=($3),
-          author=($4),
-          ingredients=($5),
-          preparation=($6),
-          information=($7)
-        WHERE id = $8
+          title=($2),
+          ingredients=($3),
+          preparation=($4),
+          information=($5)
+        WHERE id = $6
         `
 
       const values = [
         data.chef_id || 1,
-        data.image,
         data.title,
-        data.author,
         filteredArray(data.ingredients),
         filteredArray(data.preparation),
         data.information,
@@ -106,6 +102,19 @@ module.exports = {
       return results.rows
     } catch (error) {
       console.error(error)
+    }
+  },
+  async files(id) {
+    try {
+      const results = await db.query(`
+        SELECT files.*, recipe_id, file_id
+        FROM files
+        LEFT JOIN recipe_files ON (files.id = recipe_files.file_id)
+        WHERE recipe_files.recipe_id = $1`, [id])
+
+      return results.rows
+    } catch (error) {
+      console.error(error);
     }
   }
 }

@@ -13,7 +13,7 @@ module.exports = {
 
     return res.render('admin/recipes/create', { options })
   },
-  async post(req, res, next) { 
+  async post(req, res) { 
     try {
       if (req.files.length == 0)  return res.send('please, send at least one image')
 
@@ -59,13 +59,32 @@ module.exports = {
 
       const options = await Recipes.recipeSelectOptions()
 
-      return res.render('admin/recipes/edit', { recipe, options })
+      let files = await Recipes.files(recipe.id)
+
+      
+      files = files.map(file => ({
+        ...file,
+        src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}` 
+      }))
+
+
+      return res.render('admin/recipes/edit', { recipe, options, files })
     } catch (error) {
       console.error(error)
     }
   },
   async put(req, res) {
     try {
+      if (req.body.removed_files) {
+        const removedFiles = req.body.removed_files.split(',')
+        removedFiles.splice(-1,1)
+
+        const removedFilesPromise = removedFiles.map(id => File.delete(id))
+
+        await Promise.all(removedFilesPromise)
+      }
+
+
       await Recipes.update(req.body)
 
       return res.redirect(`/admin/recipes/${req.body.id}`) 
