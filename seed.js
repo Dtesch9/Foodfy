@@ -59,7 +59,7 @@ async function createRecipes() {
       title: faker.name.title(),
       ingredients: createArray(),
       preparation: createArray(),
-      information: createArray(),
+      information: faker.lorem.paragraph(Math.ceil(Math.random() * 10)),
       created_at: date(Date.now()).iso
     })
   }
