@@ -4,7 +4,25 @@ const File = require('../models/File')
 
 module.exports = {
   async index(req, res) {
-    const recipes = await Recipes.all()
+    let recipes = await Recipes.all()
+
+    async function getImages(recipeId) {
+      const results = await Recipes.files(recipeId)
+
+      const files = results.map(file => `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`)
+
+      return files[0]
+    }
+    
+
+    const recipesPromise = recipes.map(async recipe => {
+      recipe.image = await getImages(recipe.id)
+
+      return recipe
+    })
+
+    recipes = await Promise.all(recipesPromise)
+
 
     res.render('admin/recipes/index', { recipes })
   },
