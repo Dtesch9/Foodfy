@@ -137,6 +137,7 @@ div.app {
 }
 
 .content img {
+  object-fit: cover;
   max-width: 172px;
   width: 90%;
   height: 80px;
@@ -144,11 +145,18 @@ div.app {
 }
 
 .content-info {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
   margin-left: 20px;
 }
 
 .content-info > *{
-  margin: 4% 0;
+  margin: 2% 0;
+}
+
+.content-info a {
+  margin-bottom: 0;
 }
 
 .content-info h3 {
@@ -162,10 +170,10 @@ div.app {
   font-weight: normal;
   font-size: 14px;
   color: #777777;
-  margin-bottom: 8%;
 }
 
 .content-info a {
+  margin-top: auto;
   font-weight: bold;
   font-size: 14px;
   color: var(--rck-color);

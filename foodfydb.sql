@@ -35,6 +35,29 @@ ALTER TABLE "chefs" DROP COLUMN "avatar_url";
 ALTER TABLE "chefs" ADD COLUMN "file_id" INTEGER REFERENCES files(id);
 
 
+-- Procedure and triggers auto update on column updated_at
+CREATE FUNCTION trigger_set_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+	NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- Trigger to recipes
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON recipes
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+-- Trigger to chefs
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON chefs
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+
 
 -- to run seeds || recipe_files and files must be deleted in order
 DELETE FROM recipe_files;

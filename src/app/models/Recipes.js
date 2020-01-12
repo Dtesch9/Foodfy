@@ -10,6 +10,7 @@ module.exports = {
       SELECT recipes.*, chefs.name AS author 
       FROM recipes
       LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+      ORDER BY recipes.updated_at DESC
       `)
 
       return results.rows

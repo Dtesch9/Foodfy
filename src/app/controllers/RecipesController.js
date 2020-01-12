@@ -66,6 +66,16 @@ module.exports = {
     try {
       const { recipe } = req
 
+      async function getImages(recipeId) {
+        const results = await Recipes.files(recipeId)
+
+        const files = results.map(file => `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`)
+
+        return files[0]
+      }
+
+      recipe.image = await getImages(recipe.id)
+
       return res.render('admin/recipes/show', { item: recipe })
     } catch (error) {
       console.log(error)
