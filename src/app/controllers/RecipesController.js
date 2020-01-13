@@ -18,7 +18,7 @@ module.exports = {
     try {
       if (req.files.length == 0)  return res.send('please, send at least one image')
 
-      File.init({ table: 'files' })
+      File.create({ table: 'files' })
       const filesPromise = req.files.map(file => File.create({
           name: file.filename,
           path: file.path
@@ -108,7 +108,15 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-      await Recipes.delete(req.body.id)
+      const { recipeId } = req
+
+      const files = await LoadRecipeService.load('recipe', recipeId)
+
+      const deletedFilesPromise = files.map(id => File.delete(id))
+
+      await Promise.all(deletedFilesPromise)
+
+      await Recipes.delete(recipeId)
 
       return res.redirect('/admin/recipes')
     } catch (error) {

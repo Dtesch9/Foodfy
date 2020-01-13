@@ -62,8 +62,6 @@ module.exports = {
         src: `${req.protocol}://${req.headers.host}${results.image.replace('public', '')}`
       }
       
-      console.log(chef)
-
       return res.render('admin/chefs/edit', { chef })
     } catch (error) {
       console.error(error)
@@ -71,6 +69,19 @@ module.exports = {
   },
   async put(req, res) {
     try {
+      if (req.body.removed_photo) {
+        const id = req.body.removed_photo
+        await File.delete(id)
+      }
+
+      File.init({ table: 'files' })
+      const fileId = await File.create({
+        name,
+        path
+      })
+
+      req.body.fileId = fileId
+      
       await Chefs.update(req.body)
 
       return res.redirect(`/admin/chefs/${req.body.id}`)
@@ -81,6 +92,8 @@ module.exports = {
   async delete(req, res) {
     try {
       await Chefs.delete(req.body.id)
+      
+      await File.deleteSingle(req.body.file_id)
 
       return res.redirect('/admin/chefs')
     } catch (error) {

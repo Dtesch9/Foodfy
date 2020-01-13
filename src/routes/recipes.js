@@ -14,7 +14,7 @@ routes.get('/recipes/:id/edit', Validator.existence, RecipesController.edit)
 
 routes.post('/recipes', multer.array('images', 5), Validator.input, RecipesController.post) 
 routes.put('/recipes', multer.array('images', 5), Validator.input, RecipesController.put) 
-routes.delete('/recipes', RecipesController.delete) 
+routes.delete('/recipes', Validator.existence, RecipesController.delete) 
 
 
 module.exports = routes

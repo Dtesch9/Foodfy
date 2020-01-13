@@ -23,6 +23,7 @@
 
     <form action="/admin/chefs?_method=DELETE" method="POST" id="delete">
       <input type="hidden" name="id" value="{{chef.id}}">
+      <input type="hidden" name="file_id" value={{chef.file.id}}>
       <input type="hidden" id="total-recipes" value="{{chef.total_recipes}}">
     </form>
 
