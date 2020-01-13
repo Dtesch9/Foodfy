@@ -8,11 +8,11 @@
     <section>
       <h2>Mais acessadas</h2>
       <div class="cards">
-      {% for item in items %}
+      {% for recipe in recipes %}
         <div class="card">
-          <img src="{{item.image}}" alt="">
-          <h6>{{item.title}}</h6>
-          <p>{{item.author}}</p>
+          <img src="{{recipe.image}}" alt="">
+          <h6>{{recipe.title}}</h6>
+          <p>{{recipe.author}}</p>
         </div>
       {% endfor %}
     </section>

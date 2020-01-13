@@ -247,9 +247,13 @@ section {
 }
 
 .card img {
+  object-fit: cover;
   border-radius: 15px;
+  border: 1px solid #eee;
   margin-bottom: 2%;
-  max-width: 300px;
+
+
+  width: 300px;
   height: 140px;
 }
 

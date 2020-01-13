@@ -17,7 +17,7 @@ async function existence(req, res, next) {
 
   if (!recipe) return res.send('Error 404 not found!')
 
-  req.recipe = recipe
+  req.recipeId = id
 
   next()
 }

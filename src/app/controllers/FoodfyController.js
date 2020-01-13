@@ -1,5 +1,6 @@
 const Foodfy = require('../models/Foodfy')
 const Recipes = require('../models/Recipes')
+const LoadRecipeService = require('../services/LoadRecipeServices')
 
 module.exports = {
   async index(req, res) {
@@ -7,13 +8,14 @@ module.exports = {
       const { filter } = req.query
       
       if (filter) {
-        const recipes = await Foodfy.findBy(filter)
+        const recipes = await LoadRecipeService.load('findBy', filter)
 
-        return res.render('home/foodfy/filteredIndex', { items: recipes, filter })
+        return res.render('home/foodfy/filteredIndex', { recipes, filter })
       } else {
-        const recipes = await Recipes.all()
 
-        return res.render('home/foodfy/index', { items: recipes })
+        const recipes = await LoadRecipeService.load('recipes')
+
+        return res.render('home/foodfy/index', { recipes })
       }
 
     } catch (error) {
@@ -25,18 +27,18 @@ module.exports = {
   },
   async recipes(req, res) {
     try {
-      const recipes = await Recipes.all()
+      const recipes = await LoadRecipeService.load('recipes')
 
-      return res.render('home/foodfy/recipes', { items: recipes })
+      return res.render('home/foodfy/recipes', { recipes })
     } catch (error) {
       console.error(error)
     }
   },
   async info(req, res) {
     try {
-      const recipe = await Recipes.find(req.params.id)
+      const recipe = await LoadRecipeService.load('recipe', req.params.id)
 
-      return res.render('home/foodfy/recipe-info', { item: recipe }) 
+      return res.render('home/foodfy/recipe-info', { recipe }) 
     } catch (error) {
       console.error(error)
     }

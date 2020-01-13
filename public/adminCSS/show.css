@@ -24,34 +24,9 @@
   text-align: center;
 }
 
-.head-description {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 7%;
-}
+/* LIGHTBOX GOES HERE */
 
-.head-description img {
-  max-width: 940px;
-  width: 100%;
-  height: 280px;
-  border-radius: 15px;
-  margin-bottom: 7%;
-  object-fit: cover;
-}
-
-.head-description h6 {
-  font-weight: bold;
-  font-size: 36px;
-  color: var(--title-color);
-}
-
-.head-description p {
-  font-weight: normal;
-  font-size: 20px;
-  color: #777777;
-}
-
+/* = Index Container = */
 .recipe-container {
   margin-bottom: 8%;
 }

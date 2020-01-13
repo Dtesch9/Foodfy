@@ -1,28 +1,11 @@
 const Recipes = require('../models/Recipes')
 const File = require('../models/File')
+const LoadRecipeService = require('../services/LoadRecipeServices')
 
 
 module.exports = {
   async index(req, res) {
-    let recipes = await Recipes.all()
-
-    async function getImages(recipeId) {
-      const results = await Recipes.files(recipeId)
-
-      const files = results.map(file => `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`)
-
-      return files[0]
-    }
-
-
-    const recipesPromise = recipes.map(async recipe => {
-      recipe.image = await getImages(recipe.id)
-
-      return recipe
-    })
-
-    recipes = await Promise.all(recipesPromise)
-
+    const recipes = await LoadRecipeService.load('recipes')
 
     res.render('admin/recipes/index', { recipes })
   },
@@ -64,39 +47,20 @@ module.exports = {
   },
   async show(req, res) {
     try {
-      const { recipe } = req
+      const recipe = await LoadRecipeService.load('recipe', req.recipeId)
 
-      async function getImages(recipeId) {
-        const results = await Recipes.files(recipeId)
-
-        const files = results.map(file => `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`)
-
-        return files[0]
-      }
-
-      recipe.image = await getImages(recipe.id)
-
-      return res.render('admin/recipes/show', { item: recipe })
+      return res.render('admin/recipes/show', { recipe })
     } catch (error) {
       console.log(error)
     }
   },
   async edit(req, res) {
     try {
-      const { recipe } = req
+      const recipe = await LoadRecipeService.load('recipe', req.recipeId)
 
       const options = await Recipes.recipeSelectOptions()
 
-      let files = await Recipes.files(recipe.id)
-
-      
-      files = files.map(file => ({
-        ...file,
-        src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}` 
-      }))
-
-
-      return res.render('admin/recipes/edit', { recipe, options, files })
+      return res.render('admin/recipes/edit', { recipe, options })
     } catch (error) {
       console.error(error)
     }
