@@ -44,6 +44,12 @@ const LoadService = {
     const recipesPromise = recipes.map(format)
     return Promise.all(recipesPromise)
   },
+  async chefRecipes() {
+    const results = await Recipes.recipesChef(this.filter)
+    const recipesPromise = await results.map(format)
+
+    return await Promise.all(recipesPromise)
+  },
   format
 }
 

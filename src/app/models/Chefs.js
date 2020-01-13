@@ -17,13 +17,15 @@ module.exports = {
       const query = `
         INSERT INTO chefs (
           name,
+          file_id,
           created_at
-        ) VALUES ($1, $2)
+        ) VALUES ($1, $2, $3)
         RETURNING id
       `
 
       const values = [
         data.name,
+        data.fileId,
         date(Date.now()).iso
       ]
 
@@ -75,18 +77,15 @@ module.exports = {
       console.error(error)      
     }
   },
-  async recipesChef(id) {
+  async chefFile(id) {
     try {
-      const results =
-      await db.query(`
-        SELECT * 
-        FROM recipes
-        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        WHERE chefs.id = $1`, [id])
-
-        return results.rows
+      const results = await db.query(`
+        SELECT * FROM files
+        WHERE id = $1`, [id])
+        
+      return results.rows[0]
     } catch (error) {
-      console.error(erro)
+      console.error(error);
     }
   }
 }

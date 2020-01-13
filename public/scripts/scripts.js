@@ -105,6 +105,61 @@ const PhotosUpload = {
   }
 }
 
+const PhotoUpload = {
+  input: document.querySelector('.fileName'),
+  oldPhotoId: '',
+  target: '',
+  file: [],
+  fileActions(event) {
+    this.oldPhotoId = event.target.parentNode.id
+    this.target = event.target
+
+    this.removePhoto()
+
+    this.cleanField()
+
+    const { files: fileList } = event.target
+    const fileName = fileList[0].name
+
+    Array.from(fileList).forEach(file => this.file.push(file))
+
+
+    if (fileList.length != 1) {
+      alert('Envie 1 photo apenas!')
+      event.preventDefault()
+    }
+
+
+    this.input.appendChild(this.createInput(fileName))
+    
+    event.target.files = this.getFile()
+  },
+  cleanField() {
+    if (this.input.children.length > 0) {
+      this.input.children[0].remove()
+    }
+  },
+  createInput(name) {
+    const input = document.createElement('input')
+
+    input.setAttribute('placeholder', name)
+
+    return input
+  },
+  getFile() {
+    const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer()
+
+    this.file.forEach(file => dataTransfer.items.add(file)) 
+
+    return dataTransfer.files
+  },
+  removePhoto() {
+    const inputHidden = this.target.parentNode.children[0]
+    
+    inputHidden.value = this.oldPhotoId
+  }
+}
+
 const ImageGallery = {
   highlight: document.querySelector('.highlight > img'),
   previews: document.querySelectorAll('.gallery-preview img'),

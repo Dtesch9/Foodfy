@@ -4,8 +4,10 @@ async function input(req, res, next) {
   const keys = Object.keys(req.body)
 
   for (let key of keys) {
-    if (req.body[key] == "") return res.send('Please fulfill all fields!')
+    if (req.body[key] == "" && key != 'removed_photo') return res.send('Please fulfill all fields!')
   }
+
+  if (!req.file) return res.send('Send at least one photo!')
 
   next()
 }
@@ -13,9 +15,9 @@ async function input(req, res, next) {
 async function existence(req, res, next) {
   const chef = await Chefs.find(req.params.id)
 
-  if (!chef) return res.send('Error 404 not found!')
+  if (!chef) return res.send('Error 404 Chef not found!')
 
-  req.chef = chef
+  req.chefId = req.params.id
 
   next()
 }

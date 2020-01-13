@@ -105,6 +105,18 @@ module.exports = {
       console.error(error)
     }
   },
+  async recipesChef(id) {
+    try {
+      const results =
+        await db.query(`
+          SELECT * FROM recipes
+          WHERE chef_id = $1`, [id])
+
+      return results.rows
+    } catch (error) {
+      console.error(erro)
+    }
+  },
   async files(id) {
     try {
       const results = await db.query(`

@@ -1,9 +1,13 @@
 const Chefs = require('../models/Chefs')
+const File = require('../models/File')
+const LoadChefService = require('../services/LoadChefService')
+const LoadRecipeService = require('../services/LoadRecipeServices')
+
 
 module.exports = {
   async index(req, res) {
     try {
-      const chefs = await Chefs.all()
+      const chefs = await LoadChefService.load('chefs')
 
       return res.render('admin/chefs/index', { chefs })
     } catch (error) {
@@ -19,9 +23,11 @@ module.exports = {
   },
   async show(req, res) {
     try {
-      const recipes = await Chefs.recipesChef(req.params.id)
+      const { chefId } = req
 
-      const { chef } = req
+      const chef = await LoadChefService.load('chef', chefId)
+      
+      const recipes = await LoadRecipeService.load('chefRecipes', chefId)
 
       return res.render('admin/chefs/show', { recipes, chef })
     } catch (error) {
@@ -30,16 +36,33 @@ module.exports = {
   },
   async post(req, res) {
     try {
-    const chefId = await Chefs.create(req.body)
-    
-    return res.redirect(`/admin/chefs/${chefId}`)
+      const { filename: name, path } = req.file
+
+      File.init({ table: 'files' })
+      const fileId = await File.create({
+        name,
+        path
+      })
+
+      req.body.fileId = fileId
+
+      const chefId = await Chefs.create(req.body)
+      
+      return res.redirect(`/admin/chefs/${chefId}`)
     } catch (error) {
       console.error(error)
     }
   },
   async edit(req, res) {
     try {
-      const chef = req.chef
+      const results = await LoadChefService.load('chef', req.chefId) 
+
+      const chef = {
+        ...results,
+        src: `${req.protocol}://${req.headers.host}${results.image.replace('public', '')}`
+      }
+      
+      console.log(chef)
 
       return res.render('admin/chefs/edit', { chef })
     } catch (error) {

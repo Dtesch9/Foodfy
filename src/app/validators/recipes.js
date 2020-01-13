@@ -1,6 +1,6 @@
 const Recipes = require('../models/Recipes')
 
-async function input(req, res, next) {
+ function input(req, res, next) {
   const keys = Object.keys(req.body)
 
   for (let key of keys) {
@@ -15,7 +15,7 @@ async function existence(req, res, next) {
 
   const recipe = await Recipes.find(id)
 
-  if (!recipe) return res.send('Error 404 not found!')
+  if (!recipe) return res.send('Error 404 Recipe not found!')
 
   req.recipeId = id
 

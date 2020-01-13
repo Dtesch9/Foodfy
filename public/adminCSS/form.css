@@ -40,6 +40,7 @@
 
 .field input[type="text"],
 .field input[type="url"],
+.fileName input,
 select,
 textarea {
   background-color: #FFFFFF;

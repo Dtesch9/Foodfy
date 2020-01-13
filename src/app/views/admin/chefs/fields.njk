@@ -8,16 +8,23 @@
   <div class="field">
     <p>Autor</p>
 
-    {% if file %}
-      <input type="url" Placeholder="{{file.path}}">
+    {% if chef.file %}
+      <div class="fileName">
+        <input type="url" placeholder="{{chef.src}}">
+      </div>
+    {% else %}
+      <div class="fileName"></div>
     {% endif %}
 
-    <div id="avatar-upload">
+
+    <div class="avatar-upload" id="{{chef.file.id}}">
+      <input type="hidden" name="removed_photo">
       <input 
         id="avatar-input"
         type="file" 
-        name="name"
-        accept="image/*" 
+        name="photo"
+        accept="image/*"
+        onchange="PhotoUpload.fileActions(event)"
       >
       <p>Enviar Avatar</p>
     </div>    
