@@ -63,7 +63,7 @@ module.exports = {
 
       const values = [
         data.name,
-        data.fileId,
+        data.fileId || data.file_id,
         data.id
       ]
 

@@ -1,5 +1,6 @@
 const Foodfy = require('../models/Foodfy')
 const LoadRecipeService = require('../services/LoadRecipeServices')
+const LoadChefService = require('../services/LoadChefService')
 
 module.exports = {
   async index(req, res) {
@@ -44,7 +45,12 @@ module.exports = {
   },
   async chefs(req, res) {
     try {
-      const chefs = await Foodfy.chefs()
+      let chefs = await Foodfy.chefs()
+
+      const chefsPromise = chefs.map(LoadChefService.format)
+
+      chefs = await Promise.all(chefsPromise)
+
 
       return res.render('home/foodfy/chefs', { chefs })
     } catch (error) {

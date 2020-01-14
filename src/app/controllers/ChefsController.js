@@ -36,6 +36,8 @@ module.exports = {
   },
   async post(req, res) {
     try {
+      if (!req.file) return res.send('Send at least one photo!')
+      
       const { filename: name, path } = req.file
 
       File.init({ table: 'files' })
@@ -70,17 +72,23 @@ module.exports = {
   async put(req, res) {
     try {
       if (req.body.removed_photo) {
+        const { filename: name, path } = req.file
+        
+        File.init({ table: 'files' })
+        const fileId = await File.create({
+          name,
+          path
+        })
+
+        req.body.fileId = fileId
+        
+        await Chefs.update(req.body)
+
         const id = req.body.removed_photo
         await File.delete(id)
+
       }
-
-      File.init({ table: 'files' })
-      const fileId = await File.create({
-        name,
-        path
-      })
-
-      req.body.fileId = fileId
+        
       
       await Chefs.update(req.body)
 

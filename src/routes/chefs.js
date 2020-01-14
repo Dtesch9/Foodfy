@@ -13,7 +13,7 @@ routes.get('/chefs/:id/edit', Validator.existence, ChefsController.edit)
 
 
 routes.post('/chefs', multer.single('photo'), Validator.input, ChefsController.post)
-routes.put('/chefs', Validator.input, ChefsController.put)
+routes.put('/chefs', multer.single('photo'), Validator.input, ChefsController.put)
 routes.delete('/chefs', ChefsController.delete)
 
 
