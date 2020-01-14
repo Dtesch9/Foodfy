@@ -9,7 +9,7 @@ const File = require('./src/app/models/File')
 const { date } = require('./src/lib/utility')
 
 let recipesIds = []
-let totalChefs = 5
+let totalChefs = 8
 let chefsIds = []
 let totalRecipes = 8
 let filesIds = []
@@ -17,8 +17,8 @@ let filesIds = []
 async function cleanDb() {
   await db.query(`
     DELETE FROM recipe_files;
-    DELETE FROM files;
     DELETE FROM chefs;
+    DELETE FROM files;
     DELETE FROM recipes;
 
     ALTER SEQUENCE chefs_id_seq RESTART WITH 1;
@@ -37,10 +37,25 @@ function createArray() {
     
 async function createChefs() {
   const chefs = []
+  const files = []
+
+  while (files.length < totalChefs) {
+    files.push({
+      name: `${Date.now()}-${faker.image.image()}`,
+      path: `${files.length + 1}-public/images/placeholder.png`
+    })
+  }
+
+  File.init({ table: 'files' })
+  const filesPromise = files.map(file => File.create(file))
+
+  const chefsPhotosIds = await Promise.all(filesPromise)
+
 
   while (chefs.length < totalChefs) {
     chefs.push({
       name: faker.name.findName(),
+      fileId: chefsPhotosIds[chefs.length],
       created_at: date(Date.now()).iso
     })
   }
