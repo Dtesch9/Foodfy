@@ -1,5 +1,4 @@
 const Chefs = require('../models/Chefs')
-const File = require('../models/File')
 
 async function format(chef) {
   const file = await getImage(chef.file_id)

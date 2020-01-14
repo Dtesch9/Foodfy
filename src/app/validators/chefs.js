@@ -7,8 +7,6 @@ async function input(req, res, next) {
     if (req.body[key] == "" && key != 'removed_photo') return res.send('Please fulfill all fields!')
   }
 
-  if (!req.file) return res.send('Send at least one photo!')
-
   next()
 }
 
