@@ -108,14 +108,14 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-      const { recipeId } = req
+      const recipeId = req.body.id
 
-      const files = await LoadRecipeService.load('recipe', recipeId)
-
-      const deletedFilesPromise = files.map(id => File.delete(id))
-
+      const files = await Recipes.files(recipeId)
+   
+      const deletedFilesPromise = files.map(file => File.delete(file.id))
+      
       await Promise.all(deletedFilesPromise)
-
+      
       await Recipes.delete(recipeId)
 
       return res.redirect('/admin/recipes')

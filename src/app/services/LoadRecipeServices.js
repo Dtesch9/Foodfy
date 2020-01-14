@@ -4,9 +4,11 @@ const Foodfy = require('../models/Foodfy')
 async function format(recipe) {
   const files = await getImages(recipe.id)
 
-  recipe.image = files[0].src
-  recipe.files = files
-  recipe.filename = files[0].name
+  if (files[0]) {
+    recipe.image = files[0].src
+    recipe.files = files
+    recipe.filename = files[0].name
+  }
 
   return recipe
 }

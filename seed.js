@@ -42,7 +42,7 @@ async function createChefs() {
   while (files.length < totalChefs) {
     files.push({
       name: `${Date.now()}-${faker.image.image()}`,
-      path: `${files.length + 1}-public/images/placeholder.png`
+      path: `public/images/${files.length + 1}-placeholder.png`
     })
   }
 
@@ -86,7 +86,7 @@ async function createRecipes() {
 async function createFiles() {
   const files = []
 
-  while (files.length < 20) {
+  while (files.length < 15) {
     files.push({
       name: `${Date.now()}-${faker.image.image()}`,
       path: `public/images/placeholder-${files.length + 1}.png`

@@ -1,5 +1,4 @@
 const Foodfy = require('../models/Foodfy')
-const Recipes = require('../models/Recipes')
 const LoadRecipeService = require('../services/LoadRecipeServices')
 
 module.exports = {
