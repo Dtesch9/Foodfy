@@ -2,6 +2,7 @@ const Chefs = require('../models/Chefs')
 const File = require('../models/File')
 const LoadChefService = require('../services/LoadChefService')
 const LoadRecipeService = require('../services/LoadRecipeServices')
+const PostFileServices = require('../services/PostFileServices')
 
 
 module.exports = {
@@ -37,14 +38,8 @@ module.exports = {
   async post(req, res) {
     try {
       if (!req.file) return res.send('Send at least one photo!')
-      
-      const { filename: name, path } = req.file
 
-      File.init({ table: 'files' })
-      const fileId = await File.create({
-        name,
-        path
-      })
+      const fileId = await PostFileServices.createFile(req.file)
 
       req.body.fileId = fileId
 
@@ -71,14 +66,8 @@ module.exports = {
   },
   async put(req, res) {
     try {
-      if (req.body.removed_photo) {
-        const { filename: name, path } = req.file
-        
-        File.init({ table: 'files' })
-        const fileId = await File.create({
-          name,
-          path
-        })
+      if (req.body.removed_photo) {       
+        const fileId = await PostFileServices.createFile(req.file)
 
         req.body.fileId = fileId
         

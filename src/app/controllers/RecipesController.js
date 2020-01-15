@@ -1,6 +1,7 @@
 const Recipes = require('../models/Recipes')
 const File = require('../models/File')
 const LoadRecipeService = require('../services/LoadRecipeServices')
+const PostFileServices = require('../services/PostFileServices')
 
 
 module.exports = {
@@ -18,26 +19,9 @@ module.exports = {
     try {
       if (!req.files || req.files.length == 0)  return res.send('please, send at least one image')
 
-      File.init({ table: 'files' })
-      const filesPromise = req.files.map(file => File.create({
-          name: file.filename,
-          path: file.path
-      }))
-
-      const filesIds = await Promise.all(filesPromise)
-
-
       const recipeId = await Recipes.create(req.body)
       
-
-      File.init({ table: 'recipe_files'} )
-      const relationPromise = filesIds.map(id => File.create({
-        recipe_id: recipeId,
-        file_id: id
-      }))
-
-      await Promise.all(relationPromise)
-
+      await PostFileServices.post('files', req.files, recipeId)
 
       return res.redirect(`/admin/recipes/${recipeId}`)
       
@@ -68,25 +52,9 @@ module.exports = {
   async put(req, res) {
     try {
       if (req.files.length != 0) {
-        File.init({ table: 'files' })
-        const filesPromise = req.files.map(file => File.create({
-          name: file.filename,
-          path: file.path
-        }))
-
-        const filesIds = await Promise.all(filesPromise)
-
-
-        File.init({ table: 'recipe_files' })
-        const relationPromise = filesIds.map(id => File.create({
-          recipe_id: req.body.id,
-          file_id: id
-        }))
-
-        await Promise.all(relationPromise)
+        await PostFileServices.post('files', req.files, req.body.id)
       }
       
-
 
       if (req.body.removed_files) {
         const removedFiles = req.body.removed_files.split(',')

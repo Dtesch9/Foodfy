@@ -29,10 +29,8 @@ async function cleanDb() {
 }
 
 function createArray() {
-  const array = new Array(5).fill(null).map(position =>
-      position = faker.fake("{{name.lastName}}, {{name.firstName}}, {{name.suffix}}"))
-
-  return array
+  return new Array(5).fill(null)
+    .map(() => faker.fake("{{name.lastName}}, {{name.firstName}}, {{name.suffix}}"))
 } 
     
 async function createChefs() {
@@ -116,7 +114,7 @@ async function init() {
   await createRecipes()
   await createFiles()
 
-  console.log('Done')
+  console.log('Done!')
 }
 
 init()
