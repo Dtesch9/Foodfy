@@ -50,7 +50,8 @@ const FileService = {
   async files() {
     return await filesTableRelation(this.data, this.id)
   },
-  createFile
+  createFile,
+  createFiles
 }
 
 
