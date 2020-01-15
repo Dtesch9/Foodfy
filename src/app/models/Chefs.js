@@ -5,7 +5,11 @@ const { date } = require('../../lib/utility')
 module.exports = {
   async all() {
     try {
-      const results = await db.query(`SELECT * FROM chefs`)
+      const results = await 
+      db.query(`
+      SELECT * FROM chefs
+      ORDER BY updated_at DESC
+      `)
 
       return results.rows
     } catch (error) {

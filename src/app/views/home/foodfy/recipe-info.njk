@@ -6,7 +6,7 @@
   <div class="app">
 
     <div class="head-description">
-      <img src="{{recipe.image}}" alt="{{recipe.title}}">
+      <img src="{{recipe.image if recipe.image else 'http://placehold.it/500x500?text=SEM-IMAGEM'}}" alt="{{recipe.title}}">
       <h6>{{ recipe.title }}</h6>
       <p>{{ recipe.author }}</p>
     </div>

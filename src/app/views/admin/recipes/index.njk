@@ -19,7 +19,7 @@
 
       {% for recipe in recipes %}
         <div class="content">
-          <img src="{{recipe.image}}" alt="{{recipe.title}}">
+          <img src="{{recipe.image if recipe.image else 'http://placehold.it/500x500?text=SEM-IMAGEM'}}" alt="{{recipe.title}}">
           <div class="content-info">
             <h3>{{recipe.title}}</h3>
             <p>{{recipe.author}}</p>

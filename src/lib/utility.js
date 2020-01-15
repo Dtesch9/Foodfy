@@ -1,16 +1,4 @@
 module.exports = {
-  addId(data) {
-    const addId = data.map((file, index) => {
-      if (!file.id) {
-        return {
-          id: Number(index + 1),
-          ...file
-        }
-      }
-    })
-    
-    return addId
-  },
   filteredArray(array) {
     return array.filter(array => array != "")
   },

@@ -43,7 +43,7 @@ module.exports = {
 
       const results = await db.query(query, values)
 
-      return results.rows[0].id
+      return results.rows[0].id 
     } catch (error) {
       console.error(error)
     }

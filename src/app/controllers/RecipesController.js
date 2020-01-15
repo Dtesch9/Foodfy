@@ -16,9 +16,9 @@ module.exports = {
   },
   async post(req, res) { 
     try {
-      if (req.files.length == 0)  return res.send('please, send at least one image')
+      if (!req.files || req.files.length == 0)  return res.send('please, send at least one image')
 
-      File.create({ table: 'files' })
+      File.init({ table: 'files' })
       const filesPromise = req.files.map(file => File.create({
           name: file.filename,
           path: file.path
@@ -30,7 +30,7 @@ module.exports = {
       const recipeId = await Recipes.create(req.body)
       
 
-      File.init({ table: 'recipe_files'})
+      File.init({ table: 'recipe_files'} )
       const relationPromise = filesIds.map(id => File.create({
         recipe_id: recipeId,
         file_id: id
@@ -111,7 +111,7 @@ module.exports = {
       const recipeId = req.body.id
 
       const files = await Recipes.files(recipeId)
-   
+      
       const deletedFilesPromise = files.map(file => File.delete(file.id))
       
       await Promise.all(deletedFilesPromise)
@@ -123,4 +123,4 @@ module.exports = {
       console.error(error)
     }
   }
-} 
+}

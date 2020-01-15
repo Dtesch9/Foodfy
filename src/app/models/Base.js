@@ -6,7 +6,7 @@ const Base = {
 
     this.table = table
   },
-  async create(fields) { // name: filename, path: path
+  async create(fields) { // name: Douglas, path: public/images
     try {
       let keys = [],
         values = []

@@ -9,7 +9,7 @@
 
       {% for chef in chefs %}
         <div class="chef">
-          <img src="{{chef.image}}" alt="{{chef.name}}">
+          <img src="{{chef.image if chef.image else 'http://placehold.it/500x500?text=SEM-IMAGEM'}}" alt="{{chef.name}}">
           <div class="chef-info">
             <h3>{{ chef.name }}</h3>
             {% if (chef.total_recipes > 1) or (chef.total_recipes == 0) %}

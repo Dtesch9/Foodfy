@@ -34,6 +34,7 @@ const PhotosUpload = {
 
     if (fileList.length > filesLimite) {
       alert(`Permitido apenas ${filesLimite} imagens`)
+      this.input.value = null
       event.preventDefault()
       return true
     }
