@@ -1,7 +1,7 @@
 const db = require('../../config/db')
 
 
-function find(filters, table) {
+function find(filters, table, order) {
   try {
     let query = `SELECT * FROM ${table}`
 
@@ -13,11 +13,15 @@ function find(filters, table) {
           query += ` ${field} = '${filters[key][field]}'`
         })
       })
-
-      console.log(`Query: ${query}`)
-
-      return db.query(query)
     }
+
+    if (order) {
+      query += ` ORDER BY ${order} DESC`
+    }
+
+    console.log(`Query: ${query}`)
+
+    return db.query(query)
   } catch (error) {
     console.error(error)
   }
@@ -53,13 +57,18 @@ const Base = {
 
       const results = await db.query(query)
 
+      console.log(query)
       return results.rows[0].id
     } catch (error) {
       console.error(error);
     }
   },
-  async findAll(filters) {
-    const results =  await find(filters, this.table)
+  async findOne(id) {
+    const results = await find({where:{id}}, this.table)
+    return results.rows[0]
+  },
+  async findAll(filters, order) {
+    const results =  await find(filters, this.table, order)
     return results.rows
   },
   update(id, fields) {

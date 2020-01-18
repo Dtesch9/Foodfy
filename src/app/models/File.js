@@ -6,7 +6,7 @@ const { unlinkSync } = require('fs')
 
 module.exports = {
   ...Base, 
-  async delete(id) {
+  async deleteMult(id) {
     try {
       const result = await db.query('SELECT * FROM files WHERE id = $1', [id])
       const filePath = result.rows[0].path

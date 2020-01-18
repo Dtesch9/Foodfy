@@ -1,45 +1,11 @@
 const db = require('../../config/db')
 
-const { date } = require('../../lib/utility')
+const Base = require('../models/Base')
+
+Base.init({ table: 'chefs' })
 
 module.exports = {
-  async all() {
-    try {
-      const results = await 
-      db.query(`
-      SELECT * FROM chefs
-      ORDER BY updated_at DESC
-      `)
-
-      return results.rows
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async create(data) {
-    try {
-      const query = `
-        INSERT INTO chefs (
-          name,
-          file_id,
-          created_at
-        ) VALUES ($1, $2, $3)
-        RETURNING id
-      `
-
-      const values = [
-        data.name,
-        data.fileId,
-        date(Date.now()).iso
-      ]
-
-      const results = await db.query(query, values)
-
-      return results.rows[0].id
-    } catch (error) {
-      console.error(error)
-    }
-  },
+  ...Base,
   async find(id) {
     try {
       const results = 
@@ -56,42 +22,4 @@ module.exports = {
       console.error(error)
     }
   },
-  update(data) {
-    try {
-      const query = `
-      UPDATE chefs SET 
-        name=($1),
-        file_id=($2)
-        WHERE id = $3
-    `
-
-      const values = [
-        data.name,
-        data.fileId || data.file_id,
-        data.id
-      ]
-
-      return db.query(query, values)
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  delete(id) {
-    try {
-      return db.query(`DELETE FROM chefs WHERE id = $1`, [id])
-    } catch (error) {
-      console.error(error)      
-    }
-  },
-  async chefFile(id) {
-    try {
-      const results = await db.query(`
-        SELECT * FROM files
-        WHERE id = $1`, [id])
-        
-      return results.rows[0]
-    } catch (error) {
-      console.error(error);
-    }
-  }
 }

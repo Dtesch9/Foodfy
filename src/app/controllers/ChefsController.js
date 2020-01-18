@@ -4,11 +4,13 @@ const LoadChefService = require('../services/LoadChefService')
 const LoadRecipeService = require('../services/LoadRecipeServices')
 const PostFileServices = require('../services/PostFileServices')
 
+const { date } = require('../../lib/utility')
+
 
 module.exports = {
   async index(req, res) {
     try {
-      const chefs = await LoadChefService.load('chefs')
+      const chefs = await LoadChefService.load('chefs', 'updated_at')
 
       return res.render('admin/chefs/index', { chefs })
     } catch (error) {
@@ -44,9 +46,11 @@ module.exports = {
 
       const fileId = await PostFileServices.createFile(req.file)
 
-      req.body.fileId = fileId
-
-      const chefId = await Chefs.create(req.body)
+      const chefId = await Chefs.create({
+        name: req.body.name,
+        file_id: fileId,
+        created_at: date(Date.now()).iso
+      })
       
       return res.redirect(`/admin/chefs/${chefId}`)
     } catch (error) {
@@ -69,20 +73,25 @@ module.exports = {
   },
   async put(req, res) {
     try {
+      const { id: chefId, file_id, name } = req.body
+
       if (req.body.removed_photo) {       
         const fileId = await PostFileServices.createFile(req.file)
-
-        req.body.fileId = fileId
         
-        await Chefs.update(req.body)
+        await Chefs.update(chefId, {
+          name,
+          file_id: fileId,
+        })
 
-        const id = req.body.removed_photo
-        await File.delete(id)
+        const deletedFileId = req.body.removed_photo
+        await File.deleteSingle(deletedFileId)
 
-      }
-        
-      
-      await Chefs.update(req.body)
+      } else {
+        await Chefs.update(chefId, {
+          name,
+          file_id,
+        })
+      }  
 
       return res.redirect(`/admin/chefs/${req.body.id}`)
     } catch (error) {

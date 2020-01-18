@@ -75,7 +75,7 @@ module.exports = {
         const removedFiles = req.body.removed_files.split(',')
         removedFiles.splice(-1,1)
 
-        const removedFilesPromise = removedFiles.map(id => File.delete(id))
+        const removedFilesPromise = removedFiles.map(id => File.deleteMult(id))
 
         await Promise.all(removedFilesPromise)
       }
@@ -107,7 +107,7 @@ module.exports = {
 
       const files = await Recipes.files(recipeId)
       
-      const deletedFilesPromise = files.map(file => File.delete(file.id))
+      const deletedFilesPromise = files.map(file => File.deleteMult(file.id))
       
       await Promise.all(deletedFilesPromise)
       

@@ -1,3 +1,4 @@
+const File = require('../models/File')
 const Chefs = require('../models/Chefs')
 
 async function format(chef) {
@@ -10,11 +11,12 @@ async function format(chef) {
 }
 
 async function getImage(fileId) {
-  const file = await Chefs.chefFile(fileId)
+  File.init({ table: 'files' })
+  const chefFile = await File.findOne(fileId)
+  
+  chefFile.path = chefFile.path.replace('public', '')
 
-  file.path = file.path.replace('public', '')
-
-  return file
+  return chefFile
 }
 
 
@@ -29,8 +31,8 @@ const loadService = {
 
     return await format(chef)
   },
-  async chefs(){
-    const chefs = await Chefs.all()
+  async chefs(orderBy){
+    const chefs = await Chefs.findAll(null, orderBy)
     const chefsPromise = chefs.map(format)
 
     return await Promise.all(chefsPromise)
