@@ -1,6 +1,6 @@
 const db = require('../../config/db')
 const Base = require('../models/Base')
-const { filteredArray, date } = require('../../lib/utility')
+
 
 Base.init({ table: 'recipes' })
 
@@ -35,13 +35,6 @@ module.exports = {
       console.error(error)
     }
   },
-  delete(id) {
-    try {
-      return db.query(`DELETE FROM recipes WHERE id = $1`, [id])
-    } catch (error) {
-      console.error(error)
-    }
-  },
   async recipeSelectOptions() {
     try {
       const results = await db.query(`SELECT name, id FROM chefs`)
@@ -49,18 +42,6 @@ module.exports = {
       return results.rows
     } catch (error) {
       console.error(error)
-    }
-  },
-  async recipesChef(id) {
-    try {
-      const results =
-        await db.query(`
-          SELECT * FROM recipes
-          WHERE chef_id = $1`, [id])
-
-      return results.rows
-    } catch (error) {
-      console.error(erro)
     }
   },
   async files(id) {

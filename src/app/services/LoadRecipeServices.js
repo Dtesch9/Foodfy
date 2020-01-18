@@ -33,24 +33,43 @@ const LoadService = {
     return this[service](filter)
   },
   async recipe() {
-    const recipe = await Recipes.find(this.filter)
-    return format(recipe)
+    try {
+      const recipe = await Recipes.find(this.filter)
+
+      return format(recipe)
+    } catch (error) {
+      console.error(error)
+    }
   },
   async recipes() {
-    const recipes = await Recipes.all()
-    const recipesPromise = recipes.map(format)
-    return Promise.all(recipesPromise)
+    try {
+      const recipes = await Recipes.all()
+      const recipesPromise = recipes.map(format)
+      
+      return Promise.all(recipesPromise)
+    } catch (error) {
+      console.error(error)
+    }
   },
   async findBy() {
-    const recipes = await Foodfy.findBy(this.filter)
-    const recipesPromise = recipes.map(format)
-    return Promise.all(recipesPromise)
+    try {
+      const recipes = await Foodfy.findBy(this.filter)
+      const recipesPromise = recipes.map(format)
+
+      return Promise.all(recipesPromise)
+    } catch (error) {
+      console.error(error)
+    }
   },
   async chefRecipes() {
-    const results = await Recipes.recipesChef(this.filter)
-    const recipesPromise = await results.map(format)
-
-    return await Promise.all(recipesPromise)
+    try {
+      const results = await Recipes.findAll(this.filter)
+      const recipesPromise = await results.map(format)
+  
+      return await Promise.all(recipesPromise)
+    } catch (error) {
+      console.error(error)
+    }
   },
   format
 }

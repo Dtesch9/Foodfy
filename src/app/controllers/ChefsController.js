@@ -28,7 +28,10 @@ module.exports = {
 
       const chef = await LoadChefService.load('chef', chefId)
       
-      const recipes = await LoadRecipeService.load('chefRecipes', chefId)
+      const recipes = await LoadRecipeService.load('chefRecipes', { 
+        where: { 
+          chef_id: chefId 
+        } })
 
       return res.render('admin/chefs/show', { recipes, chef })
     } catch (error) {

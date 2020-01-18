@@ -23,6 +23,8 @@ module.exports = {
 
       let { chef_id, title, ingredients, preparation, information, created_at } = req.body
 
+      ingredients = filteredArray(ingredients)
+      preparation = filteredArray(preparation)
       created_at = date(Date.now()).iso
 
       const recipeId = await Recipes.create({
@@ -78,7 +80,6 @@ module.exports = {
         await Promise.all(removedFilesPromise)
       }
 
-      console.log(req.body)
 
       let { chef_id, title, ingredients, preparation,
       information } = req.body

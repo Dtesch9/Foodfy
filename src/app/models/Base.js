@@ -1,5 +1,29 @@
 const db = require('../../config/db')
 
+
+function find(filters, table) {
+  try {
+    let query = `SELECT * FROM ${table}`
+
+    if (filters) {
+      Object.keys(filters).map(key => {
+        query += ` ${key}`
+
+        Object.keys(filters[key]).map(field => {
+          query += ` ${field} = '${filters[key][field]}'`
+        })
+      })
+
+      console.log(`Query: ${query}`)
+
+      return db.query(query)
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+
 const Base = {
   init({ table }) {
     if (!table) throw new Error('Invalid Params')
@@ -34,6 +58,10 @@ const Base = {
       console.error(error);
     }
   },
+  async findAll(filters) {
+    const results =  await find(filters, this.table)
+    return results.rows
+  },
   update(id, fields) {
     try {
       let line = []
@@ -50,9 +78,15 @@ const Base = {
         SET ${line.join(',')}
         WHERE id = ${id} 
       `
-      console.log(update)
 
       return db.query(update)
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  delete(id) {
+    try {
+      return db.query(`DELETE FROM ${this.table} WHERE id = ${id}`)
     } catch (error) {
       console.error(error)
     }
