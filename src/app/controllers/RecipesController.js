@@ -1,7 +1,9 @@
-const Recipes = require('../models/Recipes')
-const File = require('../models/File')
 const LoadRecipeService = require('../services/LoadRecipeServices')
 const PostFileServices = require('../services/PostFileServices')
+const Recipes = require('../models/Recipes')
+const File = require('../models/File')
+
+const { filteredArray, date } = require('../../lib/utility')
 
 
 module.exports = {
@@ -19,7 +21,18 @@ module.exports = {
     try {
       if (!req.files || req.files.length == 0)  return res.send('please, send at least one image')
 
-      const recipeId = await Recipes.create(req.body)
+      let { chef_id, title, ingredients, preparation, information, created_at } = req.body
+
+      created_at = date(Date.now()).iso
+
+      const recipeId = await Recipes.create({
+        chef_id,
+        title,
+        ingredients,
+        preparation,
+        information,
+        created_at
+      })
       
       await PostFileServices.post('files', req.files, recipeId)
 
@@ -65,8 +78,21 @@ module.exports = {
         await Promise.all(removedFilesPromise)
       }
 
+      console.log(req.body)
 
-      await Recipes.update(req.body)
+      let { chef_id, title, ingredients, preparation,
+      information } = req.body
+
+      ingredients = filteredArray(ingredients)
+      preparation = filteredArray(preparation)
+
+      await Recipes.update(req.body.id, {
+        chef_id,
+        title,
+        ingredients,
+        preparation,
+        information
+      })
 
       return res.redirect(`/admin/recipes/${req.body.id}`) 
 

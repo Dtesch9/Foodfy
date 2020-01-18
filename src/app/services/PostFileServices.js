@@ -51,7 +51,6 @@ const FileService = {
     return await filesTableRelation(this.data, this.id)
   },
   createFile,
-  createFiles
 }
 
 

@@ -1,6 +1,10 @@
 module.exports = {
   filteredArray(array) {
-    return array.filter(array => array != "")
+    const cleanedArray = array.map(item => {
+      return item.replace(/'/g, ".")
+    })
+
+    return cleanedArray.filter(array => array != "")
   },
   date(timestamp) {
     const date = new Date(timestamp)

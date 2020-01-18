@@ -13,7 +13,12 @@ const Base = {
 
       Object.keys(fields).map(key => {
         keys.push(key) // name
-        values.push(`'${fields[key]}'`) // '2313-asinha.png'
+
+        if (key == 'ingredients' || key == 'preparation') {
+          values.push(`'{${fields[key]}}'`)
+        } else {
+          values.push(`'${fields[key]}'`) // '2313-asinha.png'
+        }
       })
 
 
@@ -29,6 +34,29 @@ const Base = {
       console.error(error);
     }
   },
+  update(id, fields) {
+    try {
+      let line = []
+
+      Object.keys(fields).map(key => {
+        if (key == 'ingredients' || key == 'preparation') {
+          line.push(`${key} = '{${fields[key]}}'`)
+        } else {
+          line.push(`${key} = '${fields[key]}'`)
+        }
+      })
+
+      const update = `UPDATE ${this.table} 
+        SET ${line.join(',')}
+        WHERE id = ${id} 
+      `
+      console.log(update)
+
+      return db.query(update)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 }
 
 
