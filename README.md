@@ -33,7 +33,7 @@ sudo apt install nodejs
 sudo apt install npm
 
 # RUN THE APPLICATION WITH:
-npm start
+npm dev
 ```
 ## How it works?
 
