@@ -14,7 +14,7 @@
 .form-button button {
   background-color: var(--rck-color);
   border-radius: 4px;
-  padding: 10px 17px;
+  padding: 8px 32px;
   cursor: pointer;
 
   font-weight: bold;

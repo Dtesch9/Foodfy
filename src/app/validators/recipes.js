@@ -13,7 +13,7 @@ const Recipes = require('../models/Recipes')
 async function existence(req, res, next) {
   const { id } = req.params
 
-  const recipe = await Recipes.find(id)
+  const recipe = await Recipes.findWithJoin(id)
 
   if (!recipe) return res.send('Error 404 Recipe not found!')
 

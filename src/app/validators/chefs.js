@@ -11,7 +11,7 @@ async function input(req, res, next) {
 }
 
 async function existence(req, res, next) {
-  const chef = await Chefs.find(req.params.id)
+  const chef = await Chefs.findWithJoin(req.params.id)
 
   if (!chef) return res.send('Error 404 Chef not found!')
 

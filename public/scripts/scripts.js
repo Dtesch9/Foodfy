@@ -174,3 +174,51 @@ const ImageGallery = {
     ImageGallery.highlight.src = target.src
   }
 }
+
+const CheckBox = {
+  target: '',
+  click(event) {
+    target = event.target
+
+    target.value == 1 ? target.value = 0 : target.value = 1
+  }
+}
+
+const Validate = {
+  apply(input, func) {
+    this.clearError(input)
+
+    let results = Validate[func](input.value)
+    input.value = results.value
+
+    if (results.error)
+      this.displayError(input, results.error)
+    
+    
+  },
+  displayError(input, error) {
+    const div = document.createElement('div')
+    div.classList.add('error')
+    div.innerHTML = error
+    input.parentNode.appendChild(div)
+    input.focus()
+  },
+  clearError(input) {
+    const errorDiv = input.parentNode.querySelector('.error')
+
+    if (errorDiv)
+      errorDiv.remove()
+  },
+  validEmail(value) {
+    let error = null
+    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+    if (!value.match(mailformat))
+      error = 'Email inválido'
+
+    return {
+      error,
+      value
+    }
+  }
+}

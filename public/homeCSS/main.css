@@ -133,6 +133,12 @@ form button {
   font-size: 16px;
   color: #ffffff;
   text-align: center;
+
+  cursor: pointer;
+}
+
+form button:hover {
+  filter: brightness(90%);
 }
 
 /* = FOOTER = */
