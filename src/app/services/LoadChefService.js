@@ -27,7 +27,7 @@ const loadService = {
     return this[service](filter)
   },
   async chef(){
-    const chef = await Chefs.find(this.filter)
+    const chef = await Chefs.findWithJoin(this.filter)
 
     return await format(chef)
   },

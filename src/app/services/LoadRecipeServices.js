@@ -34,7 +34,7 @@ const LoadService = {
   },
   async recipe() {
     try {
-      const recipe = await Recipes.find(this.filter)
+      const recipe = await Recipes.findWithJoin(this.filter)
 
       return format(recipe)
     } catch (error) {

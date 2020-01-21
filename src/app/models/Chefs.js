@@ -6,7 +6,7 @@ Base.init({ table: 'chefs' })
 
 module.exports = {
   ...Base,
-  async find(id) {
+  async findWithJoin(id) {
     try {
       const results = 
       await db.query(`

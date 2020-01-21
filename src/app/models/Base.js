@@ -19,7 +19,6 @@ function find(filters, table, order) {
       query += ` ORDER BY ${order} DESC`
     }
 
-    console.log(`Query: ${query}`)
 
     return db.query(query)
   } catch (error) {

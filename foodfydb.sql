@@ -30,7 +30,7 @@ CREATE TABLE "recipe_files" (
   "file_id" INTEGER REFERENCES files(id)
 );
 
--- No longer needed avatar_url, the source of image chenged to "file"
+-- No longer needed avatar_url, the image source chenged to "file"
 ALTER TABLE "chefs" DROP COLUMN "avatar_url";
 ALTER TABLE "chefs" ADD COLUMN "file_id" INTEGER REFERENCES files(id);
 

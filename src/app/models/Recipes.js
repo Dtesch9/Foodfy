@@ -21,7 +21,7 @@ module.exports = {
       console.error(error) 
     }
   },
-  async find(id) {
+  async findWithJoin(id) {
     try {
       const results = 
       await db.query(`
