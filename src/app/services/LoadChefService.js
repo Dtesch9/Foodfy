@@ -12,7 +12,11 @@ async function format(chef) {
 
 async function getImage(fileId) {
   File.init({ table: 'files' })
-  const chefFile = await File.findOne(fileId)
+  const chefFile = await File.findOne({
+    where: {
+      id: fileId
+    }
+  })
   
   chefFile.path = chefFile.path.replace('public', '')
 

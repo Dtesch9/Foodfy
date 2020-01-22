@@ -76,6 +76,12 @@ BEFORE UPDATE ON chefs
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
+-- Trigger to users
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
 
 
 -- to run seeds || recipe_files and files must be deleted in order

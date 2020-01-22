@@ -1,6 +1,8 @@
 const { Router } = require('express')
 const routes = Router()
 
+const UserValidator = require('../app/validators/user')
+
 const SessionController = require('../app/controllers/SessionController')
 const UserController = require('../app/controllers/UserController')
 const ProfileController = require('../app/controllers/ProfileController')
@@ -30,7 +32,7 @@ routes.get('/users/register', UserController.register)
 
 // Rotas que o administrador irá acessar para gerenciar usuários
 // routes.get('/users', UserController.list) //Mostrar a lista de usuários cadastrados
-// routes.post('/users', UserController.post) //Cadastrar um usuário
+routes.post('/users', UserValidator.post, UserController.post) //Cadastrar um usuário
 // routes.put('/users', UserController.put) // Editar um usuário
 // routes.delete('/users', UserController.delete) // Deletar um usuário
 

@@ -8,7 +8,7 @@
         name="name" 
         value="{{user.name}}" 
         placeholder="Digite o nome completo"
-        required  
+        {# required   #}
       >
     </div>
 
@@ -29,8 +29,11 @@
     <div class="check-box">
       <input 
         type="checkbox" 
-        name="is_admin" 
-        value="0"
+        name="is_admin"
+        {% if is_admin == 'true' %}
+          checked
+        {% endif %}
+        value="false"
         onclick="CheckBox.click(event)"  
       >
       <p>administrador</p>

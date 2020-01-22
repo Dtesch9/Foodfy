@@ -176,11 +176,10 @@ const ImageGallery = {
 }
 
 const CheckBox = {
-  target: '',
   click(event) {
-    target = event.target
+    let target = event.target
 
-    target.value == 1 ? target.value = 0 : target.value = 1
+    target.checked == true ? target.value = 'true' : target.value = 'false'
   }
 }
 
