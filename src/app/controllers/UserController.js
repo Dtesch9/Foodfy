@@ -27,7 +27,7 @@ module.exports = {
       
       res.render('admin/users/register', {
         user: newUser,
-        error: 'Erro inesperado tente novamente'
+        error: 'Erro inesperado, tente novamente'
       })
     }
   },

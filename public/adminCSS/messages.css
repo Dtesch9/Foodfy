@@ -1,6 +1,27 @@
 @keyframes messages {
-  to {
+  0% {
+    right: -300px;
+    opacity: 0;
+  }
+  20% {
+    right: 20px;
+    opacity: 1;
+    visibility: initial;
+  }
+  90% {
+    right: 20px;
+    opacity: 1;
+  }
+  100% {
     right: -200px;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes warningMessage {
+  to {
+    top: -50px;
     opacity: 0;
   }
 }
@@ -13,26 +34,42 @@
   
   width: 350px;
   height: 120px;
-  padding: 32px 16px;
   border: 1px solid #dddddd;
   border-radius: 4px;
   color: white;
 
 
   position: fixed;
+  z-index: 1;
   top: 100px;
   right: 20px;
-  opacity: 1;
+  right: -200px;
+  visibility: hidden;
+  opacity: 0; 
 
-  animation: messages 500ms 5s ease-out forwards;
+  animation: messages 6s 100ms ease-in-out forwards;
 }
 
-@keyframes warningMessage {
-  to {
-    top: -50px;
-    opacity: 0;
-  }
+.messages .container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
+
+.messages .container .close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.close i {
+  cursor: pointer;
+}
+
+
 
 .warning-messages {
   display: flex;

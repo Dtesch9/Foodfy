@@ -10,31 +10,41 @@ function checkAllfields(body) {
 
 module.exports = {
   async post(req, res, next) {
-    const newUser =  req.body
+    try {
+      const newUser = req.body
 
-    const emptyField = checkAllfields(newUser)
+      const emptyField = checkAllfields(newUser)
 
-    if (emptyField) return res.render('admin/users/register', {
-      user: newUser,
-      warning: 'Por Favor, preencha todos os campos'
-    })
+      if (emptyField) return res.render('admin/users/register', {
+        user: newUser,
+        warning: 'Por Favor, preencha todos os campos'
+      })
 
 
-    const user = await User.findOne({
-      where: {
-        email: req.body.email
-      }
-    })
+      const user = await User.findOne({
+        where: {
+          email: req.body.email
+        }
+      })
 
-    if (user) return res.render('admin/users/register', {
-      user: newUser,
-      error: 'Usuário já cadastrado'
-    })
+      if (user) return res.render('admin/users/register', {
+        user: newUser,
+        error: 'Usuário já cadastrado'
+      })
+      
 
-    !newUser.is_admin ? newUser.is_admin = false : true
+      !newUser.is_admin ? newUser.is_admin = false : true
 
-    req.user = newUser
+      req.user = newUser
 
-    next()
+      next()
+    } catch (error) {
+      console.error(error);
+
+      res.render('admin/users/register', {
+        user: newUser,
+        error: 'Erro inesperado, tente novamente'
+      })
+    }
   }
 }

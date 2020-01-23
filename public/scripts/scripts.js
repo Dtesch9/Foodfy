@@ -183,6 +183,13 @@ const CheckBox = {
   }
 }
 
+const Close = {
+  errorContainer: document.querySelector('.messages'),
+  Error() {
+    this.errorContainer.style.display = 'none'
+  }
+}
+
 const Validate = {
   apply(input, func) {
     this.clearError(input)
