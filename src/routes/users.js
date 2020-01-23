@@ -29,6 +29,7 @@ const ProfileController = require('../app/controllers/ProfileController')
 
 // User register
 routes.get('/users/register', UserController.register)
+  .get('/users/edit/:id', UserController.edit)
 
 // Rotas que o administrador irá acessar para gerenciar usuários
 // routes.get('/users', UserController.list) //Mostrar a lista de usuários cadastrados

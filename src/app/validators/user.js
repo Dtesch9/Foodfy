@@ -14,7 +14,10 @@ module.exports = {
 
     const emptyField = checkAllfields(newUser)
 
-    if (emptyField) return res.send('Preencha todos os campos!')
+    if (emptyField) return res.render('admin/users/register', {
+      user: newUser,
+      warning: 'Por Favor, preencha todos os campos'
+    })
 
 
     const user = await User.findOne({
@@ -23,7 +26,10 @@ module.exports = {
       }
     })
 
-    if (user) return res.send('Usuário já cadastrado!')
+    if (user) return res.render('admin/users/register', {
+      user: newUser,
+      error: 'Usuário já cadastrado'
+    })
 
     !newUser.is_admin ? newUser.is_admin = false : true
 

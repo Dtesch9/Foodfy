@@ -19,7 +19,27 @@ module.exports = {
         is_admin
       })
 
-      return res.send({ user, userId })
+      return res.render('admin/users/register', {
+        success: 'Usuário Cadastrado com sucesso!'
+      })
+    } catch (error) {
+      console.error(error)
+      
+      res.render('admin/users/register', {
+        user: newUser,
+        error: 'Erro inesperado tente novamente'
+      })
+    }
+  },
+  async edit(req, res) {
+    try {
+      const user = await User.findOne({
+        where: {
+          id: req.params.id
+        }
+      })
+
+      return res.render(`admin/users/edit`, { user })
     } catch (error) {
       console.error(error)
     }

@@ -30,10 +30,10 @@
       <input 
         type="checkbox" 
         name="is_admin"
-        {% if is_admin == 'true' %}
+        {% if user.is_admin == true %}
           checked
         {% endif %}
-        value="false"
+        value="{{user.is_admin}}"
         onclick="CheckBox.click(event)"  
       >
       <p>administrador</p>

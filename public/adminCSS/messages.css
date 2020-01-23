@@ -1,0 +1,61 @@
+@keyframes messages {
+  to {
+    right: -200px;
+    opacity: 0;
+  }
+}
+
+
+.messages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 350px;
+  height: 120px;
+  padding: 32px 16px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  color: white;
+
+
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  opacity: 1;
+
+  animation: messages 500ms 5s ease-out forwards;
+}
+
+@keyframes warningMessage {
+  to {
+    top: -50px;
+    opacity: 0;
+  }
+}
+
+.warning-messages {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  color: white;
+  top: 0;
+  opacity: 1;
+
+  animation: warningMessage 400ms 5s ease-out forwards;
+}
+
+.messages.error {
+  background: #DC4747;
+}
+
+.messages.success {
+  background:  #01B12A;
+}
+
+.warning-messages.warning {
+  background: rgb(255, 167, 4);
+}
