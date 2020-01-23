@@ -19,6 +19,8 @@ module.exports = {
         is_admin
       })
 
+      req.session.userId = userId
+
       return res.render('admin/users/register', {
         success: 'Usuário Cadastrado com sucesso!'
       })
@@ -30,6 +32,9 @@ module.exports = {
         error: 'Erro inesperado, tente novamente'
       })
     }
+  },
+  async list(req, res) {
+
   },
   async edit(req, res) {
     try {
