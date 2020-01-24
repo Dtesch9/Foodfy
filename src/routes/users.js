@@ -2,6 +2,7 @@ const { Router } = require('express')
 const routes = Router()
 
 const UserValidator = require('../app/validators/user')
+const ProfileValidator = require('../app/validators/profile')
 
 const SessionController = require('../app/controllers/SessionController')
 const UserController = require('../app/controllers/UserController')
@@ -23,8 +24,8 @@ const ProfileController = require('../app/controllers/ProfileController')
 
 
 // Rotas de perfil de um usuário logado
-// routes.get('/profile', ProfileController.index) // Mostrar o formulário com dados do usuário logado
-// routes.put('/profile', ProfileController.put)// Editar o usuário logado
+routes.get('/profile', ProfileValidator.index, ProfileController.index) // Mostrar o formulário com dados do usuário logado
+routes.put('/profile', ProfileValidator.put, ProfileController.put)// Editar o usuário logado
 
 
 // User register

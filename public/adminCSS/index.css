@@ -5,6 +5,7 @@
   --rck-color: #6558C3;
   --LauchBase-color:#F7DF1E;
   --shadeOfGray-color: #999999;
+  --menu-color: #fa6705fb;
 }
 
 * {
@@ -14,6 +15,7 @@
   box-sizing: border-box;
 
   text-decoration: none;
+  list-style-type: none;
 }
 
 html, body {

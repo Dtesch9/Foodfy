@@ -1,0 +1,108 @@
+header {
+  display: flex;
+  align-items: center;
+}
+
+.account-menu {
+  position: absolute;
+  right: 8%;
+}
+
+@media (max-width: 650px) {
+  header .account-menu {
+    right: initial;
+    left: 30%;
+  }
+}
+
+@media (max-width: 565px) {
+  header .account-menu {
+    right: initial;
+    left: 34%;
+  }
+}
+
+.dropdown {
+  color: white;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropdown a {
+  color: white;
+  cursor: pointer;
+}
+
+.sub-menu {
+  z-index: 1;
+  position: absolute;
+  top: 30px;
+
+  width: 150px;
+
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--menu-color);
+  border-radius: 4px;
+
+  visibility: hidden;
+  opacity: 0;
+}
+
+.sub-menu.active {
+  visibility: initial;
+  opacity: 1;
+}
+
+.sub-menu ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sub-menu ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-bottom: 1px solid var(--menu-color);
+  width: 100%;
+}
+
+.sub-menu ul li:last-child {
+  border-bottom: none;
+}
+
+.sub-menu ul > * {
+  letter-spacing: .5px;
+  line-height: 30px;
+}
+
+.sub-menu a {
+  color: white;
+}
+
+.sub-menu form {
+  display: flex;
+  justify-content: center;
+}
+
+.sub-menu form button {
+  background: none;
+  color: white;
+
+  font-weight: bold;
+  line-height: 30px;
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+.sub-menu a:hover,
+.sub-menu form button:hover,
+.dropdown a:hover {
+  color: var(--menu-color);
+}

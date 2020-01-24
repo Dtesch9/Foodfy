@@ -1,6 +1,7 @@
 const User = require('../models/User')
 
 const crypto = require('crypto')
+const { hash } = require('bcryptjs')
 
 module.exports = {
   register(req, res) {
@@ -12,10 +13,13 @@ module.exports = {
 
       const { name, email, is_admin } = user
 
+      const password = crypto.randomBytes(2).toString('hex')
+      const passwordHash = await hash(password, 8)
+
       const userId = await User.create({
         name,
         email,
-        password: crypto.randomBytes(2).toString('hex'),
+        password,
         is_admin
       })
 
@@ -34,7 +38,18 @@ module.exports = {
     }
   },
   async list(req, res) {
+    try {
+      const users = await User.findAll(null, 'updated_at')
+      
+      return res.render('admin/users/list', { users })
+    } catch (error) {
+      console.error(error)
 
+      res.render('admin/users/list', {
+        users,
+        error: 'Erro inesperado, Tente novamente'
+      })
+    }
   },
   async edit(req, res) {
     try {

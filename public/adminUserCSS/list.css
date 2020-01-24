@@ -1,0 +1,54 @@
+.user-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 19%;
+}
+
+@media (max-width: 799px) {
+  .user-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 25%;
+  }
+}
+
+.user-container .user > * {
+  font-family: Helvetica, sans-serif;
+}
+
+.user-container .user h2 {
+  font-size: 18px;
+  font-weight: normal;
+  color: var(--title-color);
+}
+
+.user-container .user p {
+  font-size: 14px;
+  color: #777777;
+} 
+
+.user .user-actions {
+  margin-top: 10px;
+  display: flex;
+}
+
+.user .user-actions > a {
+  margin-right: 10%;
+
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--rck-color);
+}
+
+.user-actions button[type="submit"] {
+  background: none;
+  cursor: pointer;
+
+  font-weight: bold;
+  font-size: 14px;
+  color: #F55A5A;
+}
+
+.user .user-actions a:hover,
+.user .user-actions button:hover {
+  filter: brightness(70%);
+}

@@ -5,6 +5,12 @@
   margin-bottom: 3.5%;
 }
 
+@media (max-width: 650px) {
+  .head-form {
+    flex-direction: column;
+  }
+}
+
 .title h1 {
   font-weight: bold;
   font-size: 24px;
@@ -40,6 +46,7 @@
 
 .field input[type="text"],
 .field input[type="url"],
+.field input[type="password"],
 .fileName input,
 select,
 textarea {

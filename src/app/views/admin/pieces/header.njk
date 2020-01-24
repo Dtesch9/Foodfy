@@ -4,7 +4,33 @@
     <div class="links">
       <a href="/admin/recipes">Receitas</a>
       <a href="/admin/chefs">Chefs</a>
-      <a href="/admin/users/register">Usuários</a>
+      <a href="/admin/users">Usuários</a>
     </div>
   </nav>
+
+  <div class="account-menu">
+    <div class="dropdown">
+      <a onclick="Open.menu(this)">
+        <i class="material-icons">menu</i>
+      </a>
+      <div class="sub-menu">
+        <ul>
+          <li>
+            <a href="/admin/profile">Minha conta</a>
+          </li>
+          <li>
+            <a href="">Trocar Senha</a>
+          </li>
+          <li>
+            <a href="">Dark Theme</a>
+          </li>
+          <li>
+            <form action="/user/logout" method="post">
+              <button>Sair</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </header>

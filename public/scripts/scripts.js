@@ -190,6 +190,21 @@ const Close = {
   }
 }
 
+const Open = {
+  subMenu: '',
+  menu(menu) {
+    this.subMenu = menu.parentNode.querySelector('.sub-menu')
+
+    this.subMenu.classList.contains('active') ? this.removeClass() : this.addClass()
+  },
+  addClass() {
+    this.subMenu.classList.add('active')
+  },
+  removeClass() {
+    this.subMenu.classList.remove('active')
+  }
+}
+
 const Validate = {
   apply(input, func) {
     this.clearError(input)

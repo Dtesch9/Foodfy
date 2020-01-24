@@ -1,6 +1,7 @@
 .fields .register-fields {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .register-fields .field {
@@ -23,6 +24,7 @@
 
 @media (max-width: 1015px) {
   .fields .register-fields {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -32,6 +34,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  /* Profile */
+  .fields .register-fields.user-fields > * {
+    margin-bottom: 5px;
   }
 }
 
@@ -53,4 +60,9 @@
 .form-button button:hover,
 .form-button a:hover {
   filter: brightness(90%);
+}
+
+/* = Profile = */
+.register-fields.user-fields > * {
+  margin-bottom: 36px;
 }
