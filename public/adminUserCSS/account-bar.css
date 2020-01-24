@@ -41,17 +41,23 @@ header {
   position: absolute;
   top: 30px;
 
-  width: 150px;
+  width: 0;
+  height: 127px;
 
   background: rgba(0, 0, 0, 0.5);
   border: 2px solid var(--menu-color);
   border-radius: 4px;
 
+  box-shadow: 2px 2px 4px -1px rgba(0, 0, 0, 0.5);
+
   visibility: hidden;
   opacity: 0;
+
+  transition: all 1s;
 }
 
 .sub-menu.active {
+  width: 150px;
   visibility: initial;
   opacity: 1;
 }
@@ -61,6 +67,12 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  visibility: hidden;
+}
+
+.sub-menu ul.active {
+  visibility: initial;
 }
 
 .sub-menu ul li {

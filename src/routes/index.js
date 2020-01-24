@@ -10,9 +10,9 @@ const users = require('../routes/users')
 routes.get('/', (req, res) => res.redirect('/foodfy'))
 
 routes.use('/foodfy', foodfy)
-  .use('/admin', recipes, chefs)
-  .use('/admin/users', users)
+  .use('/admin', recipes, chefs, users)
 
+  
 // Alias
 routes.get('/admin', (req, res) => res.redirect('/admin/recipes'))
   .get('/recipes', (req, res) => res.redirect('/admin/recipes'))

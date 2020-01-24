@@ -14,7 +14,7 @@ module.exports = {
   async index(req, res, next) {
     try {
       const { userId: id } = req.session
-
+      
       const user = await User.findOne({
         where: {
           id
@@ -30,8 +30,7 @@ module.exports = {
       next()
     } catch (error) {
       console.error(error)
-      return res.render('admin/users/index', {
-        user,
+      return res.render('admin/users/register', {
         error: 'Erro inesperado, tente novamente'
       })
     }
