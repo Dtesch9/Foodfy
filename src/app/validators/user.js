@@ -41,7 +41,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
 
-      res.render('admin/users/register', {
+      return res.render('admin/users/register', {
         user: newUser,
         error: 'Erro inesperado, tente novamente'
       })

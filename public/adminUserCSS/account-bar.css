@@ -42,7 +42,6 @@ header {
   top: 30px;
 
   width: 0;
-  height: 127px;
 
   background: rgba(0, 0, 0, 0.5);
   border: 2px solid var(--menu-color);

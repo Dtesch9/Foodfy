@@ -1,8 +1,12 @@
 const { Router } = require('express')
 const routes = Router()
 
+
+const { onlyUsers } = require('../app/middlewares/access')
+
 const UserValidator = require('../app/validators/user')
 const ProfileValidator = require('../app/validators/profile')
+const SessionValidator = require('../app/validators/session')
 
 const SessionController = require('../app/controllers/SessionController')
 const UserController = require('../app/controllers/UserController')
@@ -11,8 +15,8 @@ const ProfileController = require('../app/controllers/ProfileController')
 
 // login/logout
 routes.get('/login', SessionController.loginForm)
-//   .post('/login', SessionController.login)
-routes.post('/logout', SessionController.logout)
+  .post('/login', SessionValidator.login, SessionController.login)
+  .post('/logout', SessionController.logout)
 
 
   // reset password / forgot
@@ -24,8 +28,8 @@ routes.post('/logout', SessionController.logout)
 
 
 // Rotas de perfil de um usuário logado
-routes.get('/profile', ProfileValidator.index, ProfileController.index) // Mostrar o formulário com dados do usuário logado
-routes.put('/profile', ProfileValidator.put, ProfileController.put)// Editar o usuário logado
+routes.get('/profile', onlyUsers, ProfileValidator.index, ProfileController.index) // Mostrar o formulário com dados do usuário logado
+routes.put('/profile', onlyUsers, ProfileValidator.put, ProfileController.put)// Editar o usuário logado
 
 
 // User register

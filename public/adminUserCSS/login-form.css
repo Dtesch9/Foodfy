@@ -1,7 +1,3 @@
-header.none-login {
-  display: none;
-}
-
 .head-login {
   display: flex;
   flex-direction: column;

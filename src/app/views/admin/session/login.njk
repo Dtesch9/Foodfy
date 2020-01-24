@@ -4,7 +4,7 @@
 
 {% block content %}
   <div class="app">
-    <form action="/admin/profile?_method=PUT" method="POST">
+    <form action="/admin/login" method="POST">
 
       <div class="head-login">
         <div>
@@ -22,7 +22,8 @@
             <p>Email</p>
             <input 
               type="text" 
-              name="email" 
+              name="email"
+              value="{{user.email}}"
               placeholder="Digite seu email"
               {# required #}
               onblur="Validate.apply(this, 'validEmail')"
@@ -47,4 +48,8 @@
       </div>
     </form>
   </div>
+{% endblock %}
+
+{% block script %}
+  <script src="/scripts/hideNav.js"></script>
 {% endblock %}
