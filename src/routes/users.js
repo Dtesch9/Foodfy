@@ -11,8 +11,8 @@ const ProfileController = require('../app/controllers/ProfileController')
 
 // login/logout
 // routes.get('/login', SessionController.loginForm)
-//   .post('login', SessionController.login)
-//   .post('login', SessionController.logout)
+//   .post('/login', SessionController.login)
+//   .post('/logout', SessionController.logout)
 
 
   // reset password / forgot
@@ -29,14 +29,14 @@ routes.put('/profile', ProfileValidator.put, ProfileController.put)// Editar o u
 
 
 // User register
-routes.get('/users/register', UserController.register)
-  .get('/users/edit/:id', UserController.edit)
+routes.get('/register', UserController.register)
+  .get('/edit/:id', UserController.edit)
 
 // Rotas que o administrador irá acessar para gerenciar usuários
-routes.get('/users', UserController.list) //Mostrar a lista de usuários cadastrados
-routes.post('/users', UserValidator.post, UserController.post) //Cadastrar um usuário
-// routes.put('/users', UserController.put) // Editar um usuário
-// routes.delete('/users', UserController.delete) // Deletar um usuário
+routes.get('/', UserController.list) //Mostrar a lista de usuários cadastrados
+routes.post('/', UserValidator.post, UserController.post) //Cadastrar um usuário
+// routes.put('/', UserController.put) // Editar um usuário
+// routes.delete('/', UserController.delete) // Deletar um usuário
 
 
 module.exports = routes

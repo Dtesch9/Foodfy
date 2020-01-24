@@ -10,12 +10,14 @@ const users = require('../routes/users')
 routes.get('/', (req, res) => res.redirect('/foodfy'))
 
 routes.use('/foodfy', foodfy)
-routes.use('/admin', recipes, chefs, users)
+  .use('/admin', recipes, chefs)
+  .use('/admin/users', users)
 
 // Alias
 routes.get('/admin', (req, res) => res.redirect('/admin/recipes'))
   .get('/recipes', (req, res) => res.redirect('/admin/recipes'))
   .get('/chefs', (req, res) => res.redirect('/admin/chefs'))
+  .get('/users', (req, res) => res.redirect('/admin/users'))
 
 
 module.exports = routes
