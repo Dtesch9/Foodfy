@@ -50,5 +50,34 @@ module.exports = {
         error: 'Erro inesperado, tente novamente'
       })
     }
+  },
+  async forgot(req, res, next) {
+   try {
+     const emptyField = checkAllfields(req.body)
+
+     if (emptyField) return res.render('admin/session/forgot-password', {
+       user: req.body,
+       warning: 'Por Favor, preencha todos os campos'
+     })
+
+
+     const emailVerified = await User.findOne({ where: { email: req.body.email } })
+
+     if (!emailVerified) return res.render('admin/session/forgot-password', {
+       user: req.body,
+       error: 'Email Não cadastrado!'
+     })
+
+     req.user = emailVerified
+
+     next()
+   } catch (error) {
+     console.error(error)
+
+     return res.render('admin/session/forgot-password', {
+       user: req.body,
+       error: 'Erro inesperado, tente novamente'
+     })
+   }
   }
 }

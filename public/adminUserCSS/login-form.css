@@ -47,3 +47,7 @@
   font-size: 16px;
   color:  #969696;
 }
+
+.forgot-footer {
+  justify-content: flex-end;
+}

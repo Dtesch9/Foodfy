@@ -2,7 +2,7 @@ const { Router } = require('express')
 const routes = Router()
 
 
-const { onlyUsers } = require('../app/middlewares/access')
+const { onlyUsers, notLogged } = require('../app/middlewares/access')
 
 const UserValidator = require('../app/validators/user')
 const ProfileValidator = require('../app/validators/profile')
@@ -14,15 +14,15 @@ const ProfileController = require('../app/controllers/ProfileController')
 
 
 // login/logout
-routes.get('/login', SessionController.loginForm)
+routes.get('/login', notLogged, SessionController.loginForm)
   .post('/login', SessionValidator.login, SessionController.login)
   .post('/logout', SessionController.logout)
 
 
   // reset password / forgot
-// routes.get('/forgot-password', SessionController.forgotForm)
-//   .get('/password-reset', SessionController.resetForm)
-//   .post('/forgot-password', SessionController.forgot)
+routes.get('/forgot-password', notLogged, SessionController.forgotForm)
+  .get('/password-reset', SessionController.resetForm)
+  .post('/forgot-password', SessionValidator.forgot, SessionController.forgot)
 //   .post('/password-reset', SessionController.reset)
 
 
