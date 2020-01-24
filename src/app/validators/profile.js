@@ -56,7 +56,7 @@ module.exports = {
 
       const granted = compare(password, oldUser.password)
 
-      if (password != oldUser.password) return res.render('admin/users/index', {
+      if (!granted) return res.render('admin/users/index', {
         user: req.body,
         error: 'Senha incorreta!, tente novamente'
       })

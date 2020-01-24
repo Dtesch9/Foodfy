@@ -10,6 +10,11 @@ module.exports = {
      })
    } catch (error) {
      console.error(error)
+
+     return res.render('admin/users/index', {
+       user,
+       error: 'Erro inesperado! Tente novamente'
+     })
    }
   },
   async put(req, res) {

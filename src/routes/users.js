@@ -23,7 +23,7 @@ routes.get('/login', notLogged, SessionController.loginForm)
 routes.get('/forgot-password', notLogged, SessionController.forgotForm)
   .get('/password-reset', SessionController.resetForm)
   .post('/forgot-password', SessionValidator.forgot, SessionController.forgot)
-//   .post('/password-reset', SessionController.reset)
+  .post('/password-reset', SessionValidator.reset, SessionController.reset)
 
 
 
