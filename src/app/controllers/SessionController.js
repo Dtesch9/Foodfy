@@ -38,6 +38,7 @@ const email = (name, token) => `
     margin-top: 100px;
       text-decoration: none;
       background-color: #6558C3;
+      border: 2px solid #6558C3;
       border-radius: 4px;
       padding: 8px 32px;
       cursor: pointer;
@@ -49,7 +50,7 @@ const email = (name, token) => `
 
   a:hover {
     background:none;
-      border: 2px solid #6558C3;
+    border: 2px solid #6558C3;
   }
   </style>
   </head>
@@ -73,12 +74,13 @@ module.exports = {
   },
   login(req, res) {
     req.session.userId = req.user.id
+    req.session.is_admin = req.user.is_admin
 
     return res.redirect('/admin/profile')
   },
   async logout(req, res) {
     await req.session.destroy()
-    return res.redirect('/admin/users')
+    return res.redirect('/admin/login')
   },
   forgotForm(req, res) {
     return res.render('admin/session/forgot-password')

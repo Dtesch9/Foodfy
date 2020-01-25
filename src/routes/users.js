@@ -2,7 +2,7 @@ const { Router } = require('express')
 const routes = Router()
 
 
-const { onlyUsers, notLogged } = require('../app/middlewares/access')
+const { onlyUsers, onlyAdmins, loggedRedirectToProfile } = require('../app/middlewares/access')
 
 const UserValidator = require('../app/validators/user')
 const ProfileValidator = require('../app/validators/profile')
@@ -14,14 +14,14 @@ const ProfileController = require('../app/controllers/ProfileController')
 
 
 // login/logout
-routes.get('/login', notLogged, SessionController.loginForm)
+routes.get('/login', loggedRedirectToProfile, SessionController.loginForm)
   .post('/login', SessionValidator.login, SessionController.login)
   .post('/logout', SessionController.logout)
 
 
   // reset password / forgot
-routes.get('/forgot-password', notLogged, SessionController.forgotForm)
-  .get('/password-reset', SessionController.resetForm)
+routes.get('/forgot-password', loggedRedirectToProfile, SessionController.forgotForm)
+  .get('/password-reset', loggedRedirectToProfile, SessionController.resetForm)
   .post('/forgot-password', SessionValidator.forgot, SessionController.forgot)
   .post('/password-reset', SessionValidator.reset, SessionController.reset)
 
@@ -29,18 +29,19 @@ routes.get('/forgot-password', notLogged, SessionController.forgotForm)
 
 // Rotas de perfil de um usuário logado
 routes.get('/profile', onlyUsers, ProfileValidator.index, ProfileController.index) // Mostrar o formulário com dados do usuário logado
-routes.put('/profile', onlyUsers, ProfileValidator.put, ProfileController.put)// Editar o usuário logado
+  .put('/profile', onlyUsers, ProfileValidator.put, ProfileController.put)// Editar o usuário logado
 
 
-// User register
-routes.get('/users/register', UserController.register)
-  .get('/users/edit/:id', UserController.edit)
 
-// Rotas que o administrador irá acessar para gerenciar usuários
-routes.get('/users', UserController.list) //Mostrar a lista de usuários cadastrados
-routes.post('/users', UserValidator.post, UserController.post) //Cadastrar um usuário
-// routes.put('/users/', UserController.put) // Editar um usuário
-// routes.delete('/users/', UserController.delete) // Deletar um usuário
+// Rotas que o administrador irá acessar para gerenciar usuários //
+routes.get('/users/create',onlyUsers, onlyAdmins, UserController.create)
+  .get('/users/edit/:id',onlyUsers, onlyAdmins, UserValidator.edit, UserController.edit)
+  .get('/users',onlyUsers, onlyAdmins, UserController.list) //Mostrar a lista de usuários cadastrados
+
+
+routes.post('/users',onlyUsers, onlyAdmins, UserValidator.post, UserController.post) //Cadastrar um usuário
+  .put('/users/',onlyUsers, onlyAdmins, UserValidator.put, UserController.put) // Editar um usuário
+  .delete('/users/',onlyUsers, onlyAdmins, UserValidator.delete, UserController.delete) // Deletar um usuário
 
 
 module.exports = routes

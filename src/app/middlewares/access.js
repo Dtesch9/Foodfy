@@ -4,8 +4,14 @@ function onlyUsers(req, res, next) {
   next()
 }
 
-function notLogged(req, res, next) {
+function loggedRedirectToProfile(req, res, next) {
   if (req.session.userId) return res.redirect('/admin/profile')
+
+  next()
+}
+
+function onlyAdmins(req, res, next) {
+  if (req.session.is_admin != true) return res.redirect('/admin')
 
   next()
 }
@@ -13,5 +19,6 @@ function notLogged(req, res, next) {
 
 module.exports = {
   onlyUsers,
-  notLogged
+  loggedRedirectToProfile,
+  onlyAdmins
 }

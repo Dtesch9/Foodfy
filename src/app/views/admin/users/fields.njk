@@ -25,19 +25,26 @@
     </div>
   </div>
 
-  <div class="field">
-    <div class="check-box">
-      <input 
-        type="checkbox" 
-        name="is_admin"
-        {% if user.is_admin == true %}
-          checked
-        {% endif %}
-        value="{{user.is_admin}}"
-        onclick="CheckBox.click(event)"  
-      >
-      <p>administrador</p>
+  {% if session.is_admin == true %}
+
+    <div class="field">
+      <div class="check-box">
+        <input 
+          type="checkbox" 
+          name="is_admin"
+          {% if user.is_admin == true %}
+            checked
+          {% endif %}
+          value="{{user.is_admin}}"
+          onclick="CheckBox.click(event)"  
+        >
+        <p>administrador</p>
+      </div>
     </div>
-  </div>
+
+  {% else %}
+    <input type="hidden" name="is_admin" value="false">
+
+  {% endif %}
 
 </div>

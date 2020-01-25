@@ -42,6 +42,7 @@ const passwordEmail = (name, email, password) => `
     margin-top: 100px;
       text-decoration: none;
       background-color: #6558C3;
+      border: 2px solid #6558C3;
       border-radius: 4px;
       padding: 8px 32px;
       cursor: pointer;
@@ -53,7 +54,7 @@ const passwordEmail = (name, email, password) => `
 
   a:hover {
     background:none;
-      border: 2px solid #6558C3;
+    border: 2px solid #6558C3;
   }
   </style>
   </head>
@@ -72,8 +73,8 @@ const passwordEmail = (name, email, password) => `
 
 
 module.exports = {
-  register(req, res) {
-    return res.render('admin/users/register')
+  create(req, res) {
+    return res.render('admin/users/create')
   },
   async post(req, res) {
     try {
@@ -127,15 +128,49 @@ module.exports = {
   },
   async edit(req, res) {
     try {
-      const user = await User.findOne({
-        where: {
-          id: req.params.id
-        }
-      })
+      const { user } = req
 
       return res.render(`admin/users/edit`, { user })
     } catch (error) {
       console.error(error)
+    }
+  },
+  async put(req, res) {
+    try {
+      const { id, name, email, is_admin } = req.user
+
+      await User.update(id, {
+        name,
+        email,
+        is_admin
+      })
+
+      return res.render('admin/users/edit', {
+        user: req.user,
+        success: 'Conta atualizada com Sucesso!'
+      })
+    } catch (error) {
+      console.error(error)
+
+      return res.render(`admin/users/edit`, {
+        error: 'Erro inesperado! Tente novamente!'
+      })
+    }
+  },
+  async delete(req, res) {
+    try {
+      const { id } = req.body
+
+      await User.delete(id)
+
+      return res.redirect('/admin/users')
+    } catch (error) {
+      console.log(error)
+
+      return res.render('admin/users/edit', {
+        user,
+        error: 'Erro inesperado! Tente novamente'
+      })
     }
   }
 }

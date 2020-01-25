@@ -4,26 +4,30 @@
 
 {% block content %}
   <div class="app">
-    <form action="/admin/users?_method=PUT" method="post" id="save">
-      <input type="hidden" name="id" value="{{user.id}}">
+    {% if user %}
+    
+      <form action="/admin/users?_method=PUT" method="post" id="save">
+        <input type="hidden" name="id" value="{{user.id}}">
 
-      <div class="head-form">
-        <div class="title">
-          <h1>Editando usuário</h1>
+        <div class="head-form">
+          <div class="title">
+            <h1>Editando usuário</h1>
+          </div>
+
+          <div class="form-button">
+            <button type="submit" class="delete" form="delete">Deletar</button>
+            <button type="submit" form="save">Salvar</button>
+          </div>
         </div>
 
-        <div class="form-button">
-          <button type="submit" class="delete" form="delete">Deletar</button>
-          <button type="submit" form="save">Salvar</button>
-        </div>
-      </div>
+        {% include 'admin/users/fields.njk' %}
+      </form>
 
-      {% include 'admin/users/fields.njk' %}
-    </form>
-
-    <form action="/admin/users?_method=DELETE" method="POST" id="delete">
-      <input type="hidden" name="id" value="{{user.id}}">
-    </form>
+      <form action="/admin/users?_method=DELETE" method="POST" id="delete">
+        <input type="hidden" name="id" value="{{user.id}}">
+      </form>
+      
+    {% endif %}
 
   </div>
 {% endblock %}

@@ -6,6 +6,8 @@
 
   <div class="app">
     <div class="head-create">
+      {% if session.is_admin == true %}
+
         <div>
           <h1>Gerenciar chefs</h1>
         </div>
@@ -13,6 +15,14 @@
         <div class="create-button">
           <a href="/admin/chefs/create">Criar</a>
         </div>
+
+      {% else %}
+
+        <div>
+          <h1>Chefs</h1>
+        </div>
+
+      {% endif %}
     </div>
 
     <div class="chefs-container">

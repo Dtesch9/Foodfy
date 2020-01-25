@@ -6,6 +6,10 @@ module.exports = {
 
     return cleanedArray.filter(array => array != "")
   },
+  formatBoolean(bool) {
+    !bool ? bool = false : bool = true
+    return bool
+  },
   date(timestamp) {
     const date = new Date(timestamp)
 
