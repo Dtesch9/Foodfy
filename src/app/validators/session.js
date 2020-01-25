@@ -31,7 +31,7 @@ module.exports = {
       })
 
 
-      const granted = compare(password, user.password)
+      const granted = await compare(password, user.password)
 
       if (!granted) return res.render('admin/session/login', {
         user: req.body,

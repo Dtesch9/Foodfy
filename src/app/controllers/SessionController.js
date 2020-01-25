@@ -74,13 +74,10 @@ module.exports = {
   login(req, res) {
     req.session.userId = req.user.id
 
-    return res.render('admin/users/index', {
-      user: req.user,
-      success: `Bem vindo ${req.user.name}`
-    })
+    return res.redirect('/admin/profile')
   },
-  logout(req, res) {
-    req.session.destroy()
+  async logout(req, res) {
+    await req.session.destroy()
     return res.redirect('/admin/users')
   },
   forgotForm(req, res) {
@@ -139,7 +136,7 @@ module.exports = {
         reset_token_expires: ''
       })
 
-      return res.render('admin/session/login', {
+      return res.render('admin/session/password-reset', {
         user: req.body,
         success: 'Senha atualizada com sucesso!'
       })

@@ -22,7 +22,7 @@
           <h2>{{user.name}}</h2>
           <p>{{user.email}}</p>
           <div class="user-actions">
-            <a href="/admin/user/edit/{{user.id}}">Editar</a>
+            <a href="/admin/users/edit/{{user.id}}">Editar</a>
             <form action="/admin/users?_method=DELETE" method="post" class="delete">
               <input type="hidden" name="id" value="{{user.id}}">
               <button type="submit">Remover</button>

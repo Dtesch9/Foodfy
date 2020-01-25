@@ -65,6 +65,10 @@
   top: 5px;
 }
 
+.messages .container .close i:hover {
+  color: var(--menu-color);
+}
+
 .close i {
   cursor: pointer;
 }

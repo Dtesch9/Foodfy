@@ -54,7 +54,7 @@ module.exports = {
 
       const { password } = req.body
 
-      const granted = compare(password, oldUser.password)
+      const granted = await compare(password, oldUser.password)
 
       if (!granted) return res.render('admin/users/index', {
         user: req.body,
