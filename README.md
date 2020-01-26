@@ -70,7 +70,7 @@ npm dev
 
 **Only admin can create your login account** 
 ```
-![Screenshot](https://imgur.com/K3IHf8Z)
+![Screenshot](https://i.imgur.com/WprIcUH.png)
 ```
 
 ## Creation
