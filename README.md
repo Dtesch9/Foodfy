@@ -74,31 +74,34 @@ npm dev
 
 **Only admin can create your login account** 
 
-# User menu
+## User menu
 <p align="center">
   <img src="https://i.imgur.com/WprIcUH.png" width="350" title="hover text">
   <img src="https://i.imgur.com/Fn1mYom.png" width="350" alt="accessibility text">
 </p>
 
-# Administration area | Create user option allowed for admin only
+
+## Administration area | **Create user option allowed for admin only**
+
 <p align="center">
   <img src="https://imgur.com/vnwn2uD.png" width="350" title="hover text">
   <img src="https://imgur.com/E9wXAkP.png" width="350" alt="accessibility text">
 </p>
 
-# Password Recover | use [mailtrap.io](https://mailtrap.io/)
+## Password Recover | use [mailtrap.io](https://mailtrap.io/)
 
 <p align="center">
   <img src="https://imgur.com/kosxpDs.png" width="350" title="hover text">
   <img src="https://imgur.com/FuRFPLf.png" width="350" alt="accessibility text">
 </p>
 
-# Messages
+## Messages
 
 <p align="center">
-  <img src="https://https://imgur.com/SDL0FC6.png" width="350" title="hover text">
+  <img src="https://i.imgur.com/SDL0FC6.png" width="350" title="hover text">
   <img src="https://imgur.com/0FQXE68.png" width="350" alt="accessibility text">
 </p>
+
 
 ## Creation
 ```bash
