@@ -60,21 +60,45 @@ npm dev
   port: 5432,
   database: 'foodfydb'
   
-5. Get back to root directory you have cloned
+5. Configure Mailer [mailtrap.io](https://mailtrap.io/)
+  Create a box mail and copy the smpt Credentials
+  Then past in src/lib/mailer.js
+  
+6. Get back to root directory you have cloned
   Then **RUN** node seed.js to obtain your database
   
-6. **RUN** npm dev or yarn dev **this command may variable according to your package manager**
+7. **RUN** npm dev or yarn dev **this command may variable according to your package manager**
 ```
 
 ## Guide
 
 **Only admin can create your login account** 
 
+# User menu
 <p align="center">
   <img src="https://i.imgur.com/WprIcUH.png" width="350" title="hover text">
-  <img src="https://i.imgur.com/WprIcUH.png" width="350" alt="accessibility text">
+  <img src="https://i.imgur.com/Fn1mYom.png" width="350" alt="accessibility text">
 </p>
 
+# Administration area | Create user option allowed for admin only
+<p align="center">
+  <img src="https://imgur.com/vnwn2uD.png" width="350" title="hover text">
+  <img src="https://imgur.com/E9wXAkP.png" width="350" alt="accessibility text">
+</p>
+
+# Password Recover | use [mailtrap.io](https://mailtrap.io/)
+
+<p align="center">
+  <img src="https://imgur.com/kosxpDs.png" width="350" title="hover text">
+  <img src="https://imgur.com/FuRFPLf.png" width="350" alt="accessibility text">
+</p>
+
+# Messages
+
+<p align="center">
+  <img src="https://https://imgur.com/SDL0FC6.png" width="350" title="hover text">
+  <img src="https://imgur.com/0FQXE68.png" width="350" alt="accessibility text">
+</p>
 
 ## Creation
 ```bash
