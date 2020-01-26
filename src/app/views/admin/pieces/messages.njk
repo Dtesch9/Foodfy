@@ -1,0 +1,31 @@
+{% if error %}
+  <div class="messages error">
+    <div class="container">
+      {{error}}
+      <a class="close">
+        <i 
+          class="material-icons"
+          onclick="Close.Error()"  
+        >close</i>
+      </a>
+    </div>
+  </div>
+{% endif %}
+
+{% if success %}
+  <div class="messages success">
+    <div class="container">
+      {{success}}
+      <a class="close">
+        <i 
+          class="material-icons"
+          onclick="Close.Error()"
+        >close</i>
+      </a>
+    </div>
+  </div>
+{% endif %}
+
+{% if warning %}
+  <div class="warning-messages warning">{{warning}}</div>
+{% endif %}

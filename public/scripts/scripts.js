@@ -174,3 +174,105 @@ const ImageGallery = {
     ImageGallery.highlight.src = target.src
   }
 }
+
+const CheckBox = {
+  click(event) {
+    let target = event.target
+
+    target.checked == true ? target.value = 'true' : target.value = 'false'
+  }
+}
+
+const Close = {
+  errorContainer: document.querySelector('.messages'),
+  Error() {
+    this.errorContainer.style.display = 'none'
+  }
+}
+
+const Open = {
+  subMenu: '',
+  ul: '',
+  menu(menu) {
+    this.subMenu = menu.parentNode.querySelector('.sub-menu')
+    this.ul = this.subMenu.children[0]
+
+    this.subMenu.classList.contains('active') ? this.removeClass() : this.addClass()
+  },
+  addClass() {
+    this.subMenu.classList.add('active')
+    this.ul.classList.add('active')
+  },
+  removeClass() {
+    this.subMenu.classList.remove('active')
+    this.ul.classList.remove('active')
+  }
+}
+
+const Validate = {
+  apply(input, func) {
+    this.clearError(input)
+
+    let results = Validate[func](input.value)
+    input.value = results.value
+
+    if (results.error)
+      this.displayError(input, results.error)
+    
+    
+  },
+  displayError(input, error) {
+    const div = document.createElement('div')
+    div.classList.add('error')
+    div.innerHTML = error
+    input.parentNode.appendChild(div)
+    input.focus()
+  },
+  clearError(input) {
+    const errorDiv = input.parentNode.querySelector('.error')
+
+    if (errorDiv)
+      errorDiv.remove()
+  },
+  validEmail(value) {
+    let error = null
+    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+    if (!value.match(mailformat))
+      error = 'Email inválido'
+
+    return {
+      error,
+      value
+    }
+  }
+}
+
+const Thanks = {
+  header: document.querySelector('body'),
+  rocketseat() {
+    this.cleanOldMessage()
+
+    this.header.appendChild(this.createMessage())
+  },
+  cleanOldMessage() {
+    const message = document.querySelector('.messages')
+
+    if (message) message.remove()
+  },
+  createMessage() {
+    const div = document.createElement('div')
+    div.setAttribute('class', 'messages')
+    div.classList.add('success')
+
+    const subDivContainer = document.createElement('div')
+    subDivContainer.setAttribute('class', 'container')
+    subDivContainer.innerHTML = 'Obrigado Maykão e Equipe Rocketseat'
+
+    div.appendChild(subDivContainer)
+
+    div.style.top = '270px'
+
+    return div
+  },
+}

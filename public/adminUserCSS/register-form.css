@@ -1,0 +1,68 @@
+.fields .register-fields {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.register-fields .field {
+  width: 450px;
+}
+
+.field .check-box {
+  display: flex;
+  align-items: center;
+}
+
+.field .check-box input {
+  cursor: pointer;
+}
+
+.field .check-box > p {
+  margin: 0 0 0 8px;
+  text-transform: capitalize;
+}
+
+@media (max-width: 1015px) {
+  .fields .register-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .field .check-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Profile */
+  .fields .register-fields.user-fields > * {
+    margin-bottom: 5px;
+  }
+}
+
+.form-button.user-button a {
+  background-color: var(--rck-color);
+  border-radius: 4px;
+  padding: 8px 32px;
+  cursor: pointer;
+
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+
+  background-color: #8A8A8A;
+  margin-left: 16px;
+}
+
+.form-button button:hover,
+.form-button a:hover {
+  filter: brightness(90%);
+}
+
+/* = Profile = */
+.register-fields.user-fields > * {
+  margin-bottom: 36px;
+}

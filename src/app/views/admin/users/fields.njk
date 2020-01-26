@@ -1,0 +1,50 @@
+<div class="fields">
+ 
+  <div class="register-fields">
+    <div class="field">
+      <p>Nome</p>
+      <input 
+        type="text" 
+        name="name" 
+        value="{{user.name}}" 
+        placeholder="Digite o nome completo"
+        {# required   #}
+      >
+    </div>
+
+    <div class="field">
+      <p>Email</p>
+      <input 
+        type="text" 
+        name="email" 
+        value="{{user.email}}" 
+        placeholder="Digite seu email"
+        {# required #}
+        onblur="Validate.apply(this, 'validEmail')"
+      >
+    </div>
+  </div>
+
+  {% if session.is_admin == true %}
+
+    <div class="field">
+      <div class="check-box">
+        <input 
+          type="checkbox" 
+          name="is_admin"
+          {% if user.is_admin == true %}
+            checked
+          {% endif %}
+          value="{{user.is_admin}}"
+          onclick="CheckBox.click(event)"  
+        >
+        <p>administrador</p>
+      </div>
+    </div>
+
+  {% else %}
+    <input type="hidden" name="is_admin" value="false">
+
+  {% endif %}
+
+</div>

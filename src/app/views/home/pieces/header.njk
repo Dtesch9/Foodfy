@@ -17,4 +17,52 @@
       <button type="submit">Buscar</button>
     </form>
   </nav>
+
+  <div class="account-menu">
+    <div class="dropdown">
+      <a onclick="Open.menu(this)">
+        <i class="material-icons">menu</i>
+      </a>
+      <div class="sub-menu">
+        <ul>
+
+          <li>
+            <a href="/admin/profile">{{ 'Minha Conta' if session.userId else 'Login' }}</a>
+          </li>
+
+          {% if session.userId %}
+
+            {% if session.is_admin == true %}
+              <li>
+                <a href="/admin/users/create">Criar Usuário</a>
+              </li>
+            {% endif %}
+
+            <li>
+              <a href="/admin/password-change">Trocar Senha</a>
+            </li>
+
+            <li>
+              <a href="/">Foodfy</a>
+            </li>
+
+             <li>
+              <a href="/admin">Administração</a>
+            </li>
+
+            <li>
+              <a onclick="Thanks.rocketseat()">Mensagem</a>
+            </li>
+
+            <li>
+              <form action="/admin/logout" method="post">
+                <button>Sair</button>
+              </form>
+            </li>
+            
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
 </header>

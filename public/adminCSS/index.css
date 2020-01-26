@@ -4,7 +4,8 @@
   --title-color: #111111;
   --rck-color: #6558C3;
   --LauchBase-color:#F7DF1E;
-  --shadeOfGray-color: #999999;(--shadeOfGray-color);
+  --shadeOfGray-color: #999999;
+  --menu-color: #fa6705fb;
 }
 
 * {
@@ -14,6 +15,7 @@
   box-sizing: border-box;
 
   text-decoration: none;
+  list-style-type: none;
 }
 
 html, body {
@@ -25,6 +27,21 @@ body {
   font-weight: normal;
   display: flex;
   flex-direction: column;
+}
+
+.button {
+  background-color: var(--rck-color);
+  border-radius: 4px;
+  padding: 8px 32px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.button:hover {
+  filter: brightness(90%);
 }
 
 /* = HEADER =  */

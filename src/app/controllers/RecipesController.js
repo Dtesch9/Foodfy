@@ -3,7 +3,7 @@ const PostFileServices = require('../services/PostFileServices')
 const Recipes = require('../models/Recipes')
 const File = require('../models/File')
 
-const { filteredArray, date } = require('../../lib/utility')
+const { filteredArray } = require('../../lib/utility')
 
 
 module.exports = {
@@ -13,19 +13,18 @@ module.exports = {
     res.render('admin/recipes/index', { recipes })
   },
   async create(req, res) {
-    const options = await Recipes.recipeSelectOptions()
+    const { options } = req
 
     return res.render('admin/recipes/create', { options })
   },
   async post(req, res) { 
     try {
-      if (!req.files || req.files.length == 0)  return res.send('please, send at least one image')
+      let { chef_id, title, ingredients, preparation, information } = req.body
 
-      let { chef_id, title, ingredients, preparation, information, created_at } = req.body
+      const { userId: loggedUserId } = req.session
 
       ingredients = filteredArray(ingredients)
       preparation = filteredArray(preparation)
-      created_at = date(Date.now()).iso
 
       const recipeId = await Recipes.create({
         chef_id,
@@ -33,7 +32,7 @@ module.exports = {
         ingredients,
         preparation,
         information,
-        created_at
+        user_id: loggedUserId
       })
       
       await PostFileServices.post('files', req.files, recipeId)
@@ -46,22 +45,30 @@ module.exports = {
   },
   async show(req, res) {
     try {
-      const recipe = await LoadRecipeService.load('recipe', req.recipeId)
+      const recipe = await LoadRecipeService.load('recipe', req.params.id)
 
       return res.render('admin/recipes/show', { recipe })
     } catch (error) {
       console.log(error)
+
+      return res.render('admin/recipes/show', {
+        error: 'Erro inesperado! Tente novamente'
+      })
     }
   },
   async edit(req, res) {
     try {
-      const recipe = await LoadRecipeService.load('recipe', req.recipeId)
+      const recipe = await LoadRecipeService.load('recipe', req.params.id)
 
       const options = await Recipes.recipeSelectOptions()
 
       return res.render('admin/recipes/edit', { recipe, options })
     } catch (error) {
       console.error(error)
+
+      return res.render('admin/recipes/show', {
+        error: 'Erro inesperado! Tente novamente'
+      })
     }
   },
   async put(req, res) {

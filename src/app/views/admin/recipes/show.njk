@@ -4,88 +4,93 @@
 
 {% block content %}
   <div class="app">
-
-    <div class="head-show">
-        <div>
-          <h1>Receita: {{recipe.title}}</h1>
-        </div>
-
-        <div class="show-button">
-          <a href="/admin/recipes/{{recipe.id}}/edit">Editar receita</a>
-        </div>
-    </div>
-
-    <div class="head-description">
-      <div id="gallery">
-        <div class="highlight">
-          {% if not recipe.files[0] %}
-            <img src="http://placehold.it/500x500?text=RECEITA SEM FOTO" alt="">
-          {% else %}
-            <img src="{{recipe.image}}" alt="{{recipe.title}}">
-          {% endif %}
-        </div>
-        <div class="gallery-preview">
-          {% for image in recipe.files %}
-            <img 
-              src="{{image.src}}" 
-              alt="{{recipe.title}}"
-              {% if loop.index0 == 0 %}
-                class="active"
-              {% endif %}
-              onclick="ImageGallery.setImage(event)"
-            >
-          {% endfor %}
-        </div>
-      </div>
-
-      <div class="subtitle">
-        <h6>{{ recipe.title }}</h6>
-        <p>{{ recipe.author }}</p>
-      </div>
-    </div>
-
-    <div class="recipe-container">
-
-      <div class="item">
-        <div class="prep-title">
-          <h1>Ingredients</h1>
-          <p>esconder</p>
-        </div>
-        <div class="content">
-          <ul>
-            {% for list in recipe.ingredients %}
-              <li>{{ list }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="prep-title">
-          <h1>Modo de preparo</h1>
-          <p>esconder</p>
-        </div>
-        <div class="content">
-          <ul>
-            {% for list in recipe.preparation %}
-              <li>{{ list }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="prep-title">
-          <h1>Informações adicionais</h1>
-          <p>esconder</p>
-        </div>
-        <div class="content">
-          <p>{{ recipe.information }}</p>
-        </div>
-      </div>
-    </div>
+    {% if recipe %}
     
+      <div class="head-show">
+          <div>
+            <h1>Receita: {{recipe.title}}</h1>
+          </div>
+
+          <div class="show-button">
+            {% if recipe.user_id == session.userId %}
+              <a href="/admin/recipes/{{recipe.id}}/edit">Editar receita</a>
+            {% endif %}
+          </div>
+      </div>
+
+      <div class="head-description">
+        <div id="gallery">
+          <div class="highlight">
+            {% if not recipe.files[0] %}
+              <img src="http://placehold.it/500x500?text=RECEITA SEM FOTO" alt="">
+            {% else %}
+              <img src="{{recipe.image}}" alt="{{recipe.title}}">
+            {% endif %}
+          </div>
+          <div class="gallery-preview">
+            {% for image in recipe.files %}
+              <img 
+                src="{{image.src}}" 
+                alt="{{recipe.title}}"
+                {% if loop.index0 == 0 %}
+                  class="active"
+                {% endif %}
+                onclick="ImageGallery.setImage(event)"
+              >
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="subtitle">
+          <h6>{{ recipe.title }}</h6>
+          <p>{{ recipe.author }}</p>
+        </div>
+      </div>
+
+      <div class="recipe-container">
+
+        <div class="item">
+          <div class="prep-title">
+            <h1>Ingredients</h1>
+            <p>esconder</p>
+          </div>
+          <div class="content">
+            <ul>
+              {% for list in recipe.ingredients %}
+                <li>{{ list }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="prep-title">
+            <h1>Modo de preparo</h1>
+            <p>esconder</p>
+          </div>
+          <div class="content">
+            <ul>
+              {% for list in recipe.preparation %}
+                <li>{{ list }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="prep-title">
+            <h1>Informações adicionais</h1>
+            <p>esconder</p>
+          </div>
+          <div class="content">
+            <p>{{ recipe.information }}</p>
+          </div>
+        </div>
+      </div>
+
+    {% endif %}
   </div>
+
 {% endblock %}
 
 {% block script %}

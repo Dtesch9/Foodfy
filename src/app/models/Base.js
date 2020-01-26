@@ -56,14 +56,13 @@ const Base = {
 
       const results = await db.query(query)
 
-      console.log(query)
       return results.rows[0].id
     } catch (error) {
       console.error(error);
     }
   },
-  async findOne(id) {
-    const results = await find({where:{id}}, this.table)
+  async findOne(filters) {
+    const results = await find(filters, this.table)
     return results.rows[0]
   },
   async findAll(filters, order) {

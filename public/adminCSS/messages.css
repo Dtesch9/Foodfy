@@ -1,0 +1,102 @@
+@keyframes messages {
+  0% {
+    right: -300px;
+    opacity: 0;
+  }
+  20% {
+    right: 20px;
+    opacity: 1;
+    visibility: initial;
+  }
+  90% {
+    right: 20px;
+    opacity: 1;
+  }
+  100% {
+    right: -200px;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes warningMessage {
+  to {
+    top: -50px;
+    opacity: 0;
+  }
+}
+
+
+.messages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 350px;
+  height: 120px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  color: white;
+
+
+  position: fixed;
+  z-index: 1;
+  top: 100px;
+  right: 20px;
+  right: -200px;
+  visibility: hidden;
+  opacity: 0; 
+
+  animation: messages 6s 100ms ease-in-out forwards;
+}
+
+.messages .container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.messages .container .close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.messages .container .close i:hover {
+  color: var(--menu-color);
+}
+
+.close i {
+  cursor: pointer;
+}
+
+
+
+.warning-messages {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  color: white;
+  top: 0;
+  opacity: 1;
+
+  animation: warningMessage 400ms 5s ease-out forwards;
+}
+
+.messages.error {
+  background: #DC4747;
+}
+
+.messages.success {
+  background:  #01B12A;
+}
+
+.warning-messages.warning {
+  background: rgb(255, 167, 4);
+}
