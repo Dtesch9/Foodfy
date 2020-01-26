@@ -82,7 +82,7 @@ nav .links a:first-child::after {
   background-color: rgb(90, 56, 62);
   position: absolute;
   left: 0;
-  bottom: 10px;
+  bottom: -4px;
 }
 
 .links a:hover::after {
