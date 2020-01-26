@@ -67,6 +67,8 @@ npm dev
 6. Get back to root directory you have cloned
   Then **RUN** node seed.js to obtain your database
   
+7. Replace **images folder content** by the one at **imageBK**
+  
 7. **RUN** npm dev or yarn dev **this command may variable according to your package manager**
 ```
 
