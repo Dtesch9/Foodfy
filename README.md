@@ -70,7 +70,7 @@ npm dev
 ```bash
 Douglas Tesch beginner developer
 ```
-Feel free to see how it works, enjoy it.
+Feel free to make changes and of course, enjoy it.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
