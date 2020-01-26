@@ -5,7 +5,8 @@ CREATE TABLE "chefs" (
   "id" SERIAL PRIMARY KEY,
   "name" text NOT NULL,
   "avatar_url" text NOT NULL,
-  "created_at" TIMESTAMP DEFAULT(now())
+  "created_at" TIMESTAMP DEFAULT(now()),
+  "updated_at" TIMESTAMP DEFAULT(now())
 );
 
 CREATE TABLE "recipes" (
@@ -15,7 +16,8 @@ CREATE TABLE "recipes" (
   "ingredients" text[] NOT NULL,
   "preparation" text[] NOT NULL,
   "information" text NOT NULL,
-  "created_at" TIMESTAMP DEFAULT(now())
+  "created_at" TIMESTAMP DEFAULT(now()),
+  "updated_at" TIMESTAMP DEFAULT(now())
 );
 
 CREATE TABLE "files" (

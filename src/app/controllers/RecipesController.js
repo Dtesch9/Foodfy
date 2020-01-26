@@ -3,7 +3,7 @@ const PostFileServices = require('../services/PostFileServices')
 const Recipes = require('../models/Recipes')
 const File = require('../models/File')
 
-const { filteredArray, date } = require('../../lib/utility')
+const { filteredArray } = require('../../lib/utility')
 
 
 module.exports = {
@@ -19,11 +19,12 @@ module.exports = {
   },
   async post(req, res) { 
     try {
-      let { chef_id, title, ingredients, preparation, information, created_at } = req.body
+      let { chef_id, title, ingredients, preparation, information } = req.body
+
+      const { userId: loggedUserId } = req.session
 
       ingredients = filteredArray(ingredients)
       preparation = filteredArray(preparation)
-      created_at = date(Date.now()).iso
 
       const recipeId = await Recipes.create({
         chef_id,
@@ -31,7 +32,7 @@ module.exports = {
         ingredients,
         preparation,
         information,
-        created_at
+        user_id: loggedUserId
       })
       
       await PostFileServices.post('files', req.files, recipeId)
