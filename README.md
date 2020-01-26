@@ -4,9 +4,6 @@ Lastest Version of Foodfy web app
 <a href="https://dtesch9.github.io/"><p align="rigth"><img src="https://i.imgur.com/hVSCBtc.png" width="100" title="hover text"></p></a>
 
 
-
-Foodfy is a fiction webpage about food demonstration
-
 ## Built with
 
 HTML, CSS, JS, Node.js, PostgresSQL
