@@ -69,12 +69,12 @@ npm dev
 ## Guide
 
 **Only admin can create your login account** 
-```
-![Screenshot](https://i.imgur.com/WprIcUH.png)
-```
-```
-![Screenshot](https://imgur.com/WprIcUH.png)
-```
+
+<p align="center">
+  <img src="https://i.imgur.com/WprIcUH.png" width="350" title="hover text">
+  <img src="https://i.imgur.com/WprIcUH.png" width="350" alt="accessibility text">
+</p>
+
 
 ## Creation
 ```bash
