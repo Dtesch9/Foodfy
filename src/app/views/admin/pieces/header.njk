@@ -6,6 +6,8 @@
       <a href="/admin/chefs">Chefs</a>
       {% if session.is_admin == true %}
         <a href="/admin/users">Usuários</a>
+      {% else %}
+        <a href="/admin/profile">Usuários</a>
       {% endif %}
     </div>
   </nav>
