@@ -30,10 +30,7 @@ module.exports = {
 
       const chef = await LoadChefService.load('chef', chefId)
       
-      const recipes = await LoadRecipeService.load('chefRecipes', { 
-        where: { 
-          chef_id: chefId 
-        } })
+      const recipes = await LoadRecipeService.load('chefRecipes', { where: {chef_id: chefId} })
 
       return res.render('admin/chefs/show', { recipes, chef })
     } catch (error) {
@@ -42,8 +39,6 @@ module.exports = {
   },
   async post(req, res) {
     try {
-      if (!req.file) return res.send('Send at least one photo!')
-
       const fileId = await PostFileServices.createFile(req.file)
 
       const chefId = await Chefs.create({
@@ -63,7 +58,7 @@ module.exports = {
 
       const chef = {
         ...results,
-        src: `${req.protocol}://${req.headers.host}${results.image.replace('public', '')}`
+        src: `${req.protocol}://${req.headers.host}${results.image}`
       }
       
       return res.render('admin/chefs/edit', { chef })

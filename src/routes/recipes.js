@@ -15,7 +15,7 @@ routes.get('/recipes/:id', onlyUsers, RecipeValidator.bothShowAndEdit, RecipesCo
 routes.get('/recipes/:id/edit', onlyUsers, RecipeValidator.bothShowAndEdit, RecipesController.edit) 
 
 routes.post('/recipes', multer.array('images', 5), RecipeValidator.post, RecipesController.post) 
-routes.put('/recipes', multer.array('images', 5), RecipesController.put) 
+routes.put('/recipes', multer.array('images', 5), RecipeValidator.put, RecipesController.put) 
 routes.delete('/recipes', RecipesController.delete)
 
 

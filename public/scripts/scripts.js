@@ -247,3 +247,32 @@ const Validate = {
     }
   }
 }
+
+const Thanks = {
+  header: document.querySelector('body'),
+  rocketseat() {
+    this.cleanOldMessage()
+
+    this.header.appendChild(this.createMessage())
+  },
+  cleanOldMessage() {
+    const message = document.querySelector('.messages')
+
+    if (message) message.remove()
+  },
+  createMessage() {
+    const div = document.createElement('div')
+    div.setAttribute('class', 'messages')
+    div.classList.add('success')
+
+    const subDivContainer = document.createElement('div')
+    subDivContainer.setAttribute('class', 'container')
+    subDivContainer.innerHTML = 'Obrigado Maykão e Equipe Rocketseat'
+
+    div.appendChild(subDivContainer)
+
+    div.style.top = '270px'
+
+    return div
+  },
+}

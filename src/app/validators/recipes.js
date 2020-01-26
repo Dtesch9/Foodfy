@@ -1,4 +1,5 @@
 const Recipes = require('../models/Recipes')
+const LoadRecipeServices = require('../services/LoadRecipeServices')
 
 
 function checkAllfields(body) {
@@ -69,6 +70,46 @@ module.exports = {
       console.error(error)
 
       return res.render('admin/recipes/create', {
+        options,
+        error: 'Erro inesperado! Tente novamente'
+      })
+    }
+  },
+  async put(req, res, next) {
+    try {
+      const options = await Recipes.recipeSelectOptions()
+
+      const { userId } = req.session
+
+      const results = await LoadRecipeServices.load('recipe', req.body.id)
+
+      const recipe = req.body
+      recipe.id = results.id
+      recipe.user_id = results.user_id
+      recipe.files = results.files
+
+      if (recipe.user_id != userId) return res.render('admin/recipes/edit', {
+        recipe,
+        options,
+        error: 'Você não pode modificar esta receita!'
+      })
+
+
+      const emptyField = checkAllfields(req.body)
+
+      if (emptyField) return res.render('admin/recipes/edit', {
+        recipe,
+        options,
+        warning: 'Por favor preencha todos os campos!'
+      })
+
+
+      next()
+    } catch (error) {
+      console.error(error)
+
+      return res.render('admin/recipes/edit', {
+        recipe,
         options,
         error: 'Erro inesperado! Tente novamente'
       })

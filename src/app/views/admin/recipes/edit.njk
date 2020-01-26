@@ -13,8 +13,10 @@
         </div>
 
         <div class="form-button">
-          <button type="submit" class="delete" form="delete">Deletar</button>
-          <button type="submit" form="save">Editar Receita</button>
+          {% if recipe.user_id == session.userId %}
+            <button type="submit" class="delete" form="delete">Deletar</button>
+            <button type="submit" form="save">Editar Receita</button>
+          {% endif %}
         </div>
       </div>
 

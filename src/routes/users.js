@@ -36,9 +36,9 @@ routes.get('/profile', onlyUsers, ProfileValidator.index, ProfileController.inde
 
 
 // Rotas que o administrador irá acessar para gerenciar usuários //
-routes.get('/users/create',onlyUsers, onlyAdmins, UserController.create)
-  .get('/users/:id/edit',onlyUsers, onlyAdmins, UserValidator.edit, UserController.edit)
-  .get('/users',onlyUsers, onlyAdmins, UserController.list) 
+routes.get('/users/create', onlyAdmins, UserController.create)
+  .get('/users/:id/edit', onlyAdmins, UserValidator.edit, UserController.edit)
+  .get('/users', onlyAdmins, UserController.list) 
 
 
 routes.post('/users', UserValidator.post, UserController.post) 
