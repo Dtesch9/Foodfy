@@ -63,13 +63,13 @@ npm dev
 5. Configure Mailer [mailtrap.io](https://mailtrap.io/)
   Create a box mail and copy the smpt Credentials
   Then past in src/lib/mailer.js
+
+6. Replace **images folder content** by the one at **imageBK**
   
-6. Get back to root directory you have cloned
+7. Get back to root directory you have cloned
   Then **RUN** node seed.js to obtain your database
-  
-7. Replace **images folder content** by the one at **imageBK**
-  
-7. **RUN** npm dev or yarn dev **this command may variable according to your package manager**
+   
+8. **RUN** npm dev or yarn dev **this command may variable according to your package manager**
 ```
 
 ## Guide
