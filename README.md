@@ -66,6 +66,13 @@ npm dev
 6. **RUN** npm dev or yarn dev **this command may variable according to your package manager**
 ```
 
+## Guide
+
+**Only admin can create your login account** 
+```
+![Screenshot](https://imgur.com/K3IHf8Z)
+```
+
 ## Creation
 ```bash
 Douglas Tesch beginner developer
