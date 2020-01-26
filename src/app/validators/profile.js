@@ -6,7 +6,7 @@ function checkAllfields(body) {
   const keys = Object.keys(body)
 
   for (let key of keys) {
-    if (body[key] == "") return true
+    if (body[key] == "" && key != 'password') return true
   }
 }
 
@@ -41,10 +41,16 @@ module.exports = {
       })
 
 
+      const { password } = req.body
+
+      if (password == '') return res.render('admin/users/index', {
+        user: req.body,
+        warning: 'Digite sua senha para alterações!'
+      })
+
+      
       const { userId: id } = req.session
       const user = await User.findOne({ where: {id} })
-
-      const { password } = req.body
 
       const granted = await compare(password, user.password)
 

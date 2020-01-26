@@ -12,7 +12,7 @@
           </div>
 
           <div class="show-button">
-            {% if recipe.user_id == session.userId %}
+            {% if recipe.user_id == session.userId or session.is_admin == true %}
               <a href="/admin/recipes/{{recipe.id}}/edit">Editar receita</a>
             {% endif %}
           </div>

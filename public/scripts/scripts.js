@@ -271,7 +271,7 @@ const Thanks = {
 
     div.appendChild(subDivContainer)
 
-    div.style.top = '270px'
+    div.style.top = '300px'
     div.style.backgroundColor = '#6558C3'
 
     return div
