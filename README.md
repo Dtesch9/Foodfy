@@ -1,15 +1,24 @@
-# Desafio-Bootcamp-LaunchBase-06
+# Desafio-Final-Bootcamp-LaunchBase
 Lastest Version of Foodfy web app
-
-Criando nova funcionalidade de envio de imagens com o multer.
 
 # Foodfy
 
 Foodfy is a fiction webpage about food demonstration
 
-## Tecnologies
+## Built in:
 
 HTML, CSS, JS, Node.js, PostgresSQL
+
+## Libraries
+
+- Nodejs-crypto 
+- bcrypt 
+- multer
+- nunjucks
+- express
+- express-session
+- connect-pg-simple
+- nodemailer
 
 ## About Foodfy
 
