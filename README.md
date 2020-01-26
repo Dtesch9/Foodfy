@@ -72,6 +72,9 @@ npm dev
 ```
 ![Screenshot](https://i.imgur.com/WprIcUH.png)
 ```
+```
+![Screenshot](https://imgur.com/WprIcUH.png)
+```
 
 ## Creation
 ```bash
