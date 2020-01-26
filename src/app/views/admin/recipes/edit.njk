@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-button">
-          {% if recipe.user_id == session.userId %}
+          {% if recipe.user_id == session.userId or session.is_admin == true %}
             <button type="submit" class="delete" form="delete">Deletar</button>
             <button type="submit" form="save">Editar Receita</button>
           {% endif %}

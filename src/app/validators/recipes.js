@@ -54,6 +54,7 @@ module.exports = {
 
       if (!req.files || req.files.length == 0) return res.render('admin/recipes/create', {
         options,
+        recipe: req.body,
         error: 'Envie pelo menos uma imagem!'
       })
 
@@ -62,6 +63,7 @@ module.exports = {
 
       if (emptyField) return res.render('admin/recipes/create', {
         options,
+        recipe: req.body,
         warning: 'Por Favor, preencha todos os campos'
       })
 
@@ -79,16 +81,15 @@ module.exports = {
     try {
       const options = await Recipes.recipeSelectOptions()
 
-      const { userId } = req.session
+      const { userId, is_admin } = req.session
 
       const results = await LoadRecipeServices.load('recipe', req.body.id)
 
       const recipe = req.body
-      recipe.id = results.id
       recipe.user_id = results.user_id
       recipe.files = results.files
 
-      if (recipe.user_id != userId) return res.render('admin/recipes/edit', {
+      if (recipe.user_id != userId && is_admin != true) return res.render('admin/recipes/edit', {
         recipe,
         options,
         error: 'Você não pode modificar esta receita!'
