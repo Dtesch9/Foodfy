@@ -17,16 +17,27 @@
       </a>
       <div class="sub-menu">
         <ul>
+
           <li>
             <a href="/admin/profile">{{ 'Minha Conta' if session.userId else 'Login' }}</a>
           </li>
+
           {% if session.userId %}
+
+            {% if session.is_admin == true %}
+              <li>
+                <a href="/admin/users/create">Criar Usuário</a>
+              </li>
+            {% endif %}
+
             <li>
-              <a href="">Trocar Senha</a>
+              <a href="/admin/password-change">Trocar Senha</a>
             </li>
+
             <li>
               <a href="">Dark Theme</a>
             </li>
+
             <li>
               <form action="/admin/logout" method="post">
                 <button>Sair</button>

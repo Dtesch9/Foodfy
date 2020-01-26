@@ -1,7 +1,7 @@
 const User = require('../models/User')
 
 module.exports = {
-  async index(req, res) {
+  index(req, res) {
    try {
      const { user } = req
      
@@ -38,5 +38,5 @@ module.exports = {
        error: 'Erro inesperado, tente novamente'
      })
    }
-  }
+  },
 }

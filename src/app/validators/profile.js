@@ -15,11 +15,7 @@ module.exports = {
     try {
       const { userId: id } = req.session
       
-      const user = await User.findOne({
-        where: {
-          id
-        }
-      })
+      const user = await User.findOne({ where: {id} })
 
       if (!user) return res.render('admin/users/register', {
         error: 'Usuário não encontrado!'
@@ -46,15 +42,11 @@ module.exports = {
 
 
       const { userId: id } = req.session
-      const oldUser = await User.findOne({
-        where: {
-          id
-        }
-      })
+      const user = await User.findOne({ where: {id} })
 
       const { password } = req.body
 
-      const granted = await compare(password, oldUser.password)
+      const granted = await compare(password, user.password)
 
       if (!granted) return res.render('admin/users/index', {
         user: req.body,
@@ -71,5 +63,5 @@ module.exports = {
         error: 'Erro inesperado, tente novamente'
       })
     }
-  }
+  },
 }

@@ -98,10 +98,11 @@ module.exports = {
       })
 
 
-      req.session.userId = userId
+      // req.session.userId = userId
+      // req.session.is_admin = is_admin
 
-      return res.render('admin/users/register', {
-        success: 'Sucesso! Senha no seu Email'
+      return res.render('admin/users/create', {
+        success: `Senha enviada para ${email}`
       })
     } catch (error) {
       console.error(error)

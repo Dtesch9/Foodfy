@@ -17,33 +17,29 @@ module.exports = {
 
       const emptyField = checkAllfields(newUser)
 
-      if (emptyField) return res.render('admin/users/register', {
+      if (emptyField) return res.render('admin/users/create', {
         user: newUser,
         warning: 'Por Favor, preencha todos os campos'
       })
 
 
-      const user = await User.findOne({
-        where: {
-          email: req.body.email
-        }
-      })
+      const user = await User.findOne({ where: {email: newUser.email} })
 
-      if (user) return res.render('admin/users/register', {
+      if (user) return res.render('admin/users/create', {
         user: newUser,
         error: 'Usuário já cadastrado'
       })
       
 
-      !newUser.is_admin ? newUser.is_admin = false : true
-
       req.user = newUser
+      
+      req.user.is_admin = formatBoolean(newUser.is_admin)
 
       next()
     } catch (error) {
       console.error(error);
 
-      return res.render('admin/users/register', {
+      return res.render('admin/users/create', {
         user: newUser,
         error: 'Erro inesperado, tente novamente'
       })
@@ -72,7 +68,7 @@ module.exports = {
   },
   async put(req, res, next) {
     try {
-      let { id, is_admin } = req.body
+      const { id, is_admin } = req.body
 
       const emptyField = checkAllfields(req.body)
 

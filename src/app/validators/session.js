@@ -137,5 +137,45 @@ module.exports = {
         error: 'Erro inesperado! Tente novamente'
       })
     }
+  },
+  async passwordChange(req, res, next) {
+    try {
+      const emptyField = checkAllfields(req.body)
+
+      if (emptyField) return res.render('admin/session/password-change', {
+        user: req.body,
+        warning: 'Por Favor, preencha todos os campos'
+      })
+
+
+      const { password, newPassword, passwordRepeat } = req.body
+      const { userId: id } = req.session
+
+      const user = await User.findOne({ where: {id} })
+
+      const granted = await compare(password, user.password)
+
+      if (!granted) return res.render('admin/session/password-change', {
+        user: req.body,
+        error: 'Senha incorreta!'
+      })
+
+
+      if (newPassword != passwordRepeat) return res.render('admin/session/password-change', {
+        user: req.body,
+        error: 'Repetição de senha incorreta!'
+      })
+
+      req.newPassword = newPassword
+
+      next()
+    } catch (error) {
+      console.error(error)
+
+      return res.render('admin/session/password-change', {
+        user: req.body,
+        error: 'Erro inesperado! Tente novamente'
+      })
+    }
   }
 }

@@ -151,5 +151,32 @@ module.exports = {
         error: 'Erro inesperado, tente novamente'
       })
     }
+  },
+  passwordChangeForm(req, res) {
+    return res.render('admin/session/password-change')
+  },
+  async passwordChange(req, res) {
+    try {
+      const { newPassword: noHashPassword } = req
+      const { userId: id } = req.session
+
+      const newPassword = await hash(noHashPassword, 8)
+
+      await User.update(id, {
+        password: newPassword
+      })
+
+      return res.render('admin/session/password-change', {
+        user: req.body,
+        success: 'Senha alterada com sucesso!'
+      })
+    } catch (error) {
+      console.error(error)
+
+      return res.render('admin/session/password-change', {
+        user: req.body,
+        error: 'Erro inesperado! Tente novamente'
+      })
+    }
   }
 }

@@ -25,23 +25,25 @@ routes.get('/forgot-password', loggedRedirectToProfile, SessionController.forgot
   .post('/forgot-password', SessionValidator.forgot, SessionController.forgot)
   .post('/password-reset', SessionValidator.reset, SessionController.reset)
 
+  // Password change
+  .get('/password-change', onlyUsers, SessionController.passwordChangeForm).post('/password-change', onlyUsers, SessionValidator.passwordChange, SessionController.passwordChange)
+
 
 
 // Rotas de perfil de um usuário logado
-routes.get('/profile', onlyUsers, ProfileValidator.index, ProfileController.index) // Mostrar o formulário com dados do usuário logado
-  .put('/profile', onlyUsers, ProfileValidator.put, ProfileController.put)// Editar o usuário logado
-
+routes.get('/profile', onlyUsers, ProfileValidator.index, ProfileController.index) 
+  .put('/profile', onlyUsers, ProfileValidator.put, ProfileController.put)
 
 
 // Rotas que o administrador irá acessar para gerenciar usuários //
 routes.get('/users/create',onlyUsers, onlyAdmins, UserController.create)
-  .get('/users/edit/:id',onlyUsers, onlyAdmins, UserValidator.edit, UserController.edit)
-  .get('/users',onlyUsers, onlyAdmins, UserController.list) //Mostrar a lista de usuários cadastrados
+  .get('/users/:id/edit',onlyUsers, onlyAdmins, UserValidator.edit, UserController.edit)
+  .get('/users',onlyUsers, onlyAdmins, UserController.list) 
 
 
-routes.post('/users',onlyUsers, onlyAdmins, UserValidator.post, UserController.post) //Cadastrar um usuário
-  .put('/users/',onlyUsers, onlyAdmins, UserValidator.put, UserController.put) // Editar um usuário
-  .delete('/users/',onlyUsers, onlyAdmins, UserValidator.delete, UserController.delete) // Deletar um usuário
+routes.post('/users', UserValidator.post, UserController.post) 
+  .put('/users/', UserValidator.put, UserController.put) 
+  .delete('/users/', UserValidator.delete, UserController.delete)
 
 
 module.exports = routes
