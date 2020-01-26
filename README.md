@@ -1,7 +1,7 @@
 # Desafio-Final-Bootcamp-LaunchBase
 Lastest Version of Foodfy web app
 
-# Foodfy  <p align="left"><img src="https://i.imgur.com/hVSCBtc.png" width="350" title="hover text"></p>
+# Foodfy  <p align="rigth"><img src="https://i.imgur.com/hVSCBtc.png" width="100" title="hover text"></p>
 
 
 
