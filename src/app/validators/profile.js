@@ -41,9 +41,9 @@ module.exports = {
       })
 
 
-      const { password } = req.body
+      const { password, email } = req.body
 
-      if (password == '') return res.render('admin/users/index', {
+      if (!password) return res.render('admin/users/index', {
         user: req.body,
         warning: 'Digite sua senha para alterações!'
       })
@@ -51,6 +51,15 @@ module.exports = {
       
       const { userId: id } = req.session
       const user = await User.findOne({ where: {id} })
+
+      if (email != user.email) {
+        const emailExistes = await User.findOne({ where: {email} })
+
+        if (emailExistes) return res.render('admin/users/index', {
+          user: req.body,
+          error: 'Email já cadastrado!'
+        })
+      }
 
       const granted = await compare(password, user.password)
 
