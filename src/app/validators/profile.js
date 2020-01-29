@@ -53,9 +53,9 @@ module.exports = {
       const user = await User.findOne({ where: {id} })
 
       if (email != user.email) {
-        const emailExistes = await User.findOne({ where: {email} })
+        const emailExists = await User.findOne({ where: {email} })
 
-        if (emailExistes) return res.render('admin/users/index', {
+        if (emailExists) return res.render('admin/users/index', {
           user: req.body,
           error: 'Email já cadastrado!'
         })
