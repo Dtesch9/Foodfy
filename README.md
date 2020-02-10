@@ -33,13 +33,13 @@ Most of the contents are made up.
 ```python
 #INSTALL NODE.JS
 
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-sudo apt install nodejs
-
-#INSTALL NPM
-sudo apt install npm
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
 # RUN THE APPLICATION WITH:
+npm install
+
+# THEN
 npm dev
 ```
 ## Get Started
