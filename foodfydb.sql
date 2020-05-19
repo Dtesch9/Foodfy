@@ -11,7 +11,7 @@ CREATE TABLE "chefs" (
 
 CREATE TABLE "recipes" (
   "id" SERIAL PRIMARY KEY,
-  "chef_id" int NOT NULL,
+  "chef_id" INTEGER NOT NULL REFERENCES chefs(id),
   "title" text NOT NULL,
   "ingredients" text[] NOT NULL,
   "preparation" text[] NOT NULL,
